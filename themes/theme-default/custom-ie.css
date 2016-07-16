@@ -1,0 +1,153 @@
+/*------------------------------------------------------------------
+Subject		:	default.css
+Project		:	HRFAST
+Version		:	2.0
+Last change	:	24/02/2011
+Assigned to	:	Haris
+-------------------------------------------------------------------*/
+	 
+.btn 						{ 	outline:none; border:none !important; padding:3px 15px 5px 35px !important; height:26px; text-align:left!important;
+								color:#333 !important; font:bold normal 11px/1.4em Helvetica, Arial, sans-serif !important; text-shadow: 0px 1px 1px #fff; }
+							
+	input.btnDownload		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -26px !important; }	
+	input.btnUnlock			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -52px !important; }	
+	input.btnLock			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -78px !important; }	
+	input.btnKey			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -104px !important; }
+	input.btnNext			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -130px !important; }	
+	input.btnPrevious		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -156px !important; }	
+	input.btnReset			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -182px !important; }	
+	input.btnSetting		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -208px !important; }	
+	input.btnStructure		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -234px !important; }	
+	input.btnSubmit			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -260px !important; }		
+	input.btnSendmail		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -286px !important; }	
+	input.btnSearch			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -312px !important; }	
+	input.btnHome			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -338px !important; }	
+	input.btnEmpty			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -364px !important; }	
+	input.btnDelete			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -390px !important; }	
+	input.btnEdit			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -416px !important; }	
+	input.btnOk				{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -442px !important; }	
+	input.btnFirstpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -468px !important; }	
+	input.btnLastpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -494px !important; }	
+	input.btnGo				{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -520px !important; }	
+	input.btnSave			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -546px !important; }	
+	input.btnCancel			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -572px !important; }	
+	input.btnViewdetail		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -598px !important; }	
+	input.btnAdditem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -624px !important; }	
+	input.btnLessitem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -650px !important; }	
+	input.btnProfile		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -676px !important; }	
+	input.btnWarning		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -702px !important; }	
+	input.btnExtlink		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -728px !important; }	
+	input.btnAddmore		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -754px !important; }	
+	input.btnLessmore		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -780px !important; }	
+	input.btnNewdoc			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -806px !important; }	
+	input.btnListitem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -832px !important; }	
+	input.btnComment		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -858px !important; }	
+	input.btnRefresh		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -884px !important; }	
+	input.btnReport			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -910px !important; }	
+	input.btnCart			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -936px !important; }	
+	input.btnPrint			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -962px !important; }	
+	input.btnCut			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -988px !important; }	
+	input.btnCopy			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1014px !important; }	
+	input.btnClean			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1040px !important; }	
+	input.btnPaste			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1066px !important; }	
+	input.btnFlag			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1092px !important; }	
+	input.btnChart			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1118px !important; }	
+	input.btnTable			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1144px !important; }	
+	input.btnLove			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1170px !important; }	
+	input.btnDocument		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1196px !important; }	
+	input.btnHelp			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1222px !important; }	
+	input.btnOpenfolder		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1248px !important; }	
+	input.btnAddpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1274px !important; }	
+	input.btnRemovepage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1300px !important; }	
+	input.btnDelpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1326px !important; }	
+	input.btnCheckpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1352px !important; }	
+	input.btnNextpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1378px !important; }	
+	input.btnPrevpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1404px !important; }	
+	input.btnSelectlist		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1430px !important; }	
+	input.btnUserlogged		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1456px !important; }	
+	input.btnStar			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1482px !important; }	
+	input.btnWindow			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1508px !important; }	
+	input.btnUpload			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1534px !important; }	
+	input.btnUsergroup		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1560px !important; }	
+	
+	
+.button				{	outline:none !important; border:none !important; padding:3px 15px 5px 15px !important; height:26px; margin:1px 0;
+						color:#fff !important; font:bold normal 11px/1.4em Helvetica, Arial, sans-serif !important; text-shadow: 0px 1px 1px #500011;								
+						background:#2300a4/*#a40023*/ url(images/bg-button-ie.gif) left top repeat-x !important;							
+					}
+	.button:hover	{ background-color:#222; FILTER: alpha(Opacity=80);}
+	.button:active	{ top:1px; position:relative; }	
+	
+	
+/* CUSTOM LINK */		
+.btnlink						{	outline:none; border:none !important; padding:6px 15px 6px 35px !important; height:26px; text-decoration:none !important;
+									color:#333 !important; font:bold normal 11px/1.4em Helvetica, Arial, sans-serif !important; text-shadow: 0px 1px 1px #fff; }
+					
+	a.btnDownload		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -26px !important; }	
+	a.btnUnlock			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -52px !important; }	
+	a.btnLock			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -78px !important; }	
+	a.btnKey			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -104px !important; }
+	a.btnNext			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -130px !important; }	
+	a.btnPrevious		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -156px !important; }	
+	a.btnReset			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -182px !important; }	
+	a.btnSetting		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -208px !important; }	
+	a.btnStructure		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -234px !important; }	
+	a.btnSubmit			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -260px !important; }		
+	a.btnSendmail		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -286px !important; }	
+	a.btnSearch			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -312px !important; }	
+	a.btnHome			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -338px !important; }	
+	a.btnEmpty			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -364px !important; }	
+	a.btnDelete			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -390px !important; }	
+	a.btnEdit			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -416px !important; }	
+	a.btnOk				{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -442px !important; }	
+	a.btnFirstpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -468px !important; }	
+	a.btnLastpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -494px !important; }	
+	a.btnGo				{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -520px !important; }	
+	a.btnSave			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -546px !important; }	
+	a.btnCancel			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -572px !important; }	
+	a.btnViewdetail		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -598px !important; }	
+	a.btnAdditem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -624px !important; }	
+	a.btnLessitem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -650px !important; }	
+	a.btnProfile		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -676px !important; }	
+	a.btnWarning		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -702px !important; }	
+	a.btnExtlink		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -728px !important; }	
+	a.btnAddmore		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -754px !important; }	
+	a.btnLessmore		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -780px !important; }	
+	a.btnNewdoc			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -806px !important; }	
+	a.btnListitem		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -832px !important; }	
+	a.btnComment		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -858px !important; }	
+	a.btnRefresh		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -884px !important; }	
+	a.btnReport			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -910px !important; }	
+	a.btnCart			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -936px !important; }	
+	a.btnPrint			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -962px !important; }	
+	a.btnCut			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -988px !important; }	
+	a.btnCopy			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1014px !important; }	
+	a.btnClean			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1040px !important; }	
+	a.btnPaste			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1066px !important; }	
+	a.btnFlag			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1092px !important; }	
+	a.btnChart			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1118px !important; }	
+	a.btnTable			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1144px !important; }	
+	a.btnLove			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1170px !important; }	
+	a.btnDocument		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1196px !important; }	
+	a.btnHelp			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1222px !important; }	
+	a.btnOpenfolder		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1248px !important; }	
+	a.btnAddpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1274px !important; }	
+	a.btnRemovepage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1300px !important; }	
+	a.btnDelpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1326px !important; }	
+	a.btnCheckpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1352px !important; }	
+	a.btnNextpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1378px !important; }	
+	a.btnPrevpage		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1404px !important; }	
+	a.btnSelectlist		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1430px !important; }	
+	a.btnUserlogged		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1456px !important; }	
+	a.btnStar			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1482px !important; }	
+	a.btnWindow			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1508px !important; }	
+	a.btnUpload			{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1534px !important; }	
+	a.btnUsergroup		{ background:#eee url(images/button-icons-ie.gif) left top no-repeat !important; background-position:0px -1560px !important; }
+	
+	.btnNextarrow		{ background-position:0px -130px !important; padding-left:0 !important; padding-right:22px !important; }
+	.btnPrevarrow		{ background-position:0px -156px !important; padding-left:0 !important; padding-right:22px !important; }
+	
+	a.btnUsergroup		{ background-position:0px -1560px !important; }	
+	
+	.btnlink:hover				{ color:#000 !important; -moz-box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.1) inset !important; cursor:pointer; FILTER: alpha(Opacity=80);}
+	.btnlink:active				{ top:1px; position:relative; }

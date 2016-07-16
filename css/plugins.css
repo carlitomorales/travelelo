@@ -1,0 +1,175 @@
+/* EASY NOTOFICATION */
+#easyNotification		{ margin-bottom:10px; z-index:0; padding:7px 6px 8px 10px;	background:#d0feff /*#fffed0*/;	border:1px solid #79cacc /*#ccca79*/; color:#333; position:relative; font-size:110%; }
+#easyNotification span	{ float:right; cursor:pointer; font-weight:bold; padding:4px; }
+
+
+
+/* COLOR BOX */
+#colorbox, #cboxOverlay, #cboxWrapper	{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#cboxWrapper 							{ margin:1px 0 0 1px; background:#fff; }
+#cboxOverlay							{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft		{clear:left;}
+#cboxContent							{position:relative; overflow:visible;}
+#cboxLoadedContent						{overflow:auto;}
+#cboxLoadedContent iframe				{display:block; width:100%; height:100%; border:0;}
+#cboxTitle								{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+
+#cboxOverlay		{background:#fff;}
+
+#colorbox										{padding:3px;border:solid 2px #ccc;-webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px; -webkit-box-shadow: 2px 1px 3px #ccc; -moz-box-shadow: 2px 1px 3px #ccc; box-shadow: 2px 1px 3px #ccc; }
+    #cboxContent								{margin-top:32px; }
+        #cboxLoadedContent						{background:#fff; padding:5px;}
+        #cboxLoadingGraphic						{background:url(../images/loading.gif) no-repeat center center;}
+        #cboxLoadingOverlay						{background:#fff;}
+        #cboxTitle								{position:absolute; top:-22px; left:0; color:#000; margin-left:10px; font-size:120%;}
+        #cboxCurrent							{position:absolute; top:-22px; right:205px; text-indent:-9999px;}
+        #cboxSlideshow, #cboxPrevious, #cboxNext, #cboxClose{ margin-right:10px;text-indent:-9999px; width:20px; height:20px; position:absolute; top:-25px; background:url(../images/controls.png) no-repeat 0 0;}
+        #cboxPrevious							{background-position:0px 0px; right:44px;}
+        #cboxPrevious.hover						{background-position:0px -25px;}
+        #cboxNext								{background-position:-25px 0px; right:22px;}
+        #cboxNext.hover							{background-position:-25px -25px;}
+        #cboxClose								{background-position:-50px 0px; right:0;}
+        #cboxClose.hover						{background-position:-50px -25px;}
+        .cboxSlideshow_on #cboxPrevious, .cboxSlideshow_off #cboxPrevious{right:66px;}
+        .cboxSlideshow_on #cboxSlideshow		{background-position:-75px -25px; right:44px;}
+        .cboxSlideshow_on #cboxSlideshow.hover	{background-position:-100px -25px;}
+        .cboxSlideshow_off #cboxSlideshow		{background-position:-100px 0px; right:44px;}
+        .cboxSlideshow_off #cboxSlideshow.hover	{background-position:-75px -25px;}
+
+
+
+/* NEWS TICKER */
+.newsticker		{ list-style-type: none; font-size:110%; border: 1px solid #dcd2a8 /*#a8d2dc*/; background: #e5fcff; padding:7px 10px; margin: 0 0 10px 0; }
+
+
+/* CALENDAR */
+.datepicker 							{ border-collapse: collapse; border: 1px solid #ccc; outline:solid 4px #ddd; position: absolute; width:13%; }
+.datepicker tr.controls th 				{ height: 22px; font-size: 11px;  padding-top:4px !important; }
+.datepicker tr.controls th select		{ padding:0 !important; }
+.datepicker select 						{ font-size: 11px; }
+.datepicker tr.days th 					{ height: 18px; }
+.datepicker tfoot td 					{ padding:4px 0; text-align: center; text-transform: capitalize; }
+.datepicker th, .datepicker tfoot td 	{ background: #eee; font: 10px/18px Verdana, Arial, Helvetica, sans-serif; }
+.datepicker th span, .datepicker tfoot td span { font-weight: bold; }
+
+span.nextMonth, span.prevMonth 			{ font-size:130%; }
+span.nextMonth:hover, span.prevMonth:hover, span.close:hover, span.today:hover { color:red; }
+
+.datepicker tbody td 					{ width: 24px; height: 20px; border: 1px solid #ccc; font: 11px/22px Arial, Helvetica, sans-serif; text-align: center; background: #fff; }
+.datepicker tbody td.dates 				{ cursor: pointer; }
+.datepicker tbody td.dates.over 		{ background-color: #ffff99 /*#99ffff*/; }
+.datepicker tbody td.dates.chosen 		{ font-weight: bold; background-color: #ccffcc; }
+
+
+
+/*  */
+#navBoxz.fixed	{ position: fixed; top: 0; }
+
+
+
+/* COLLAPSIBLE PANEL */
+.collapsibleContainer				{ }
+.collapsibleContainerTitle			{ cursor:pointer; font-size:140%; text-transform:uppercase; font-weight:bold; }
+.collapsibleContainerTitle div		{ font-family:Arial, Helvetica, sans-serif !important; margin-bottom:5px; background:transparent url(../images/bg-collapsible-hover.gif) right center no-repeat; }
+.collapsibleContainerTitle div:hover{ color:#900; }
+.collapsibleContainerContent		{ padding:0; float:left; }
+
+
+
+/* SIMPLE CLLAPSIBLE DIV */
+.headingText		{ background:#fff url(../images/bg-collapsible.gif) right center no-repeat; cursor:pointer; margin-bottom:-1px !important; margin:0; padding:5px 10px; border:solid 1px #ddd; font-size:110%; }
+.headingText:hover 	{ background:#f3f3f3 url(../images/bg-collapsible-hover.gif) right center no-repeat; }
+.headingText a		{ font-weight:bold;  }
+.contentShow		{ background:#eee; padding:10px; border:solid 1px #ddd; border-top:none; margin-bottom:15px; }
+
+
+/* SLIDER */
+.main_view 					{ float: left; position: relative; width:498px;	border:solid 1px #aaa; margin:0; background:#fff; margin-bottom:10px; overflow: hidden; }
+	.window 				{ height:300px;	width: 498px; overflow: hidden; position: relative; }
+	.image_reel 			{ position: absolute; top: 0; left: 0; border:0; padding:0; margin:0; }
+	.image_reel img 		{ float: left; border:0; padding:0; margin:0; }
+
+
+/*--Paging Styles--*/
+.paging {
+	position: absolute;
+	bottom: 0px; right: -7px;
+	width: 178px; height:47px;
+	z-index: 100; /*--Assures the paging stays on the top layer--*/
+	text-align: center;
+	line-height: 40px;	
+	display: none; /*--Hidden by default, will be later shown with jQuery--*/
+}
+.paging a {
+	padding:1px 5px;
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	background:#444;
+	border: 1px solid transparent;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+.paging a.active {	
+	border: 1px solid transparent;
+}
+.paging a:hover {
+	border: 1px solid transparent;
+	color:black;
+}
+
+
+
+/* JQUERY MARQUE */
+div.jMarque 		{ padding: 10px; font-size:120%; }
+	.pointer 		{ cursor: pointer; height:65px; }
+
+
+
+/* BIRTHDAY SLIDER */
+.birthdayBox	{  }
+#divTrigger		{ padding:2px 0 6px 3px; margin:0; background:#bbb; }
+#divTrigger a:link,#divTrigger a:visited {
+	 	text-decoration: none; /* hilangkan garis bawah pada link */
+	 	margin:0 0 4px 0px; /* memberi jarak antar link */
+	 	padding: 3px 7px; /* menjadikan link seperti kotak */
+	 	border: 0px solid #ccc;
+		-moz-border-radius-topleft: 0px;
+		-moz-border-radius-topright: 0px;
+		-moz-border-radius-bottomright: 5px;
+		-moz-border-radius-bottomleft: 5px;
+		-webkit-border-top-left-radius: 0px;
+		-webkit-border-top-right-radius: 0px;
+		-webkit-border-bottom-right-radius: 5px;
+		-webkit-border-bottom-left-radius: 5px;
+		border-top-left-radius: 0px;
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+	    background-color: #fff;
+	    color: #000;
+	 }
+	 /* link yang dilalui oleh mouse dan element dengan class='selected' akan mempunyai efek yang sama */
+	 #divTrigger a:hover,#divTrigger a:active,.selected { background-color: #A00 /*#00A*/; color: #FFF; }
+	 #divContent 			{ background:#fff; margin-top:0px; border:1px solid #ccc; width: 238px; height:225px; padding:0; text-align:center; }
+	 #divContent div h4		{ font-weight:bold; background:#fff; padding:0; }
+	 #divContent div		{ display:none; padding:0; }
+	 #divContent div p		{ clear:both; margin:0; background:#fff; font-weight:bold; border:none; padding:0 0 7px 0; }
+	 #divContent div img	{ border:solid 1px #aaa; padding:4px; margin-bottom:9px; background:#fff; -moz-border-radius: 4px; border-radius: 4px; -webkit-border-radius: 4px; }
+	 .title					{ font-size: 16px; font-weight: bold; color: #600 /*#006*/; text-decoration: underline; margin-bottom: 2px; display:block; }
+
+
+
+/* CSS CLOCK */
+#clock 					{ position: relative; width: 180px;	height: 180px; margin: 0px auto 0 auto; padding:0;	background: url(../images/clockface3.jpg);	list-style: none; }
+	#sec, #min, #hour 	{ position: absolute; width: 9px; height: 180px; top: 0px; left: 85px; }
+	#sec 				{ background: url(../images/sechand2.png); z-index: 3;	}           
+	#min 				{ background: url(../images/minhand2.png); z-index: 2; }           
+	#hour 				{ background: url(../images/hourhand2.png); z-index: 1;}
+
+
+
+/*  */

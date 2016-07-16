@@ -1,0 +1,156 @@
+/* MAIN TYPOGRAPHY */ 
+html { font-size: 12px; line-height:18px; font-family: "Frutiger 45 Light", helvetica, "microsoft sans serif", arial, sans-serif; word-wrap: break-word; height: 100%;}
+strong, th, thead td, h1, h2, h3, h4, h5, h6, dt { font-weight: bold; }
+cite, em, dfn { font-style: italic; }
+code, kbd, samp, pre, tt, var, input[type='text'], input[type='password'], textarea { font-family: monaco, "Lucida Console", courier, mono-space; }
+pre { white-space: pre; }
+pre * { font-size: 100%; white-space: pre; }
+del { text-decoration: line-through; color: #666; }
+ins, dfn { border-bottom: 1px solid #ccc; }
+small, sup, sub { font-size: 85%; }
+big { font-size: 125%; line-height: 80%; }
+abbr, acronym { text-transform: uppercase; font-size: 85%; letter-spacing: .1em; }
+a abbr, a acronym { border: none; }
+abbr[title], acronym[title], dfn[title] { cursor: help; border-bottom: 1px solid #ccc; }
+sup { vertical-align: super; }
+sub { vertical-align: sub; }
+a:link, a:visited, a:active { text-decoration: none; }
+a:hover, a:focus { text-decoration: underline; }
+ 
+/* QUOTES */ 
+blockquote 				{ border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; color: #666; }
+blockquote > *:before 	{ content: "\201C"; }
+blockquote > *:after 	{ content: "\201D"; }
+
+ 
+/* language specific quotes! */ 
+q { quotes: "\201C" "\201D" "\2018" "\2019"; }
+:lang(af), :lang(nl), :lang(pl) { quotes: '\201E' '\201D' '\201A' '\2019'; }
+:lang(bg), :lang(cs), :lang(de), :lang(is), :lang(lt), :lang(sk), :lang(sr), :lang(ro) { quotes: '\201E' '\201C' '\201A' '\2018'; }
+:lang(da), :lang(hr) { quotes: '\00BB' '\00AB' '\203A' '\2039'; }
+:lang(el), :lang(es), :lang(sq), :lang(tr) { quotes: '\00AB' '\00BB' '\2039' '\203A'; }
+:lang(en-GB) { quotes: '\2018' '\2019' '\201C' '\201D'; }
+:lang(fi), :lang(sv) { quotes: '\201D' '\201D' '\2019' '\2019'; }
+:lang(fr) { quotes: '\ab\2005' '\2005\bb' '\2039\2005' '\2005\203a'; }
+
+ 
+/* NOTE: safari refuses to support the quotes syntax. I only added the english language quotes for safari to save space. */
+*[lang|='en'] q:before   { content: '\201C'; }
+*[lang|='en'] q:after    { content: '\201D'; }
+*[lang|='en'] q q:before { content: '\2018'; }
+*[lang|='en'] q q:after  { content: '\2019'; }
+
+ 
+/* FORMS */ 
+fieldset 	{ border: 1px solid #ccc; margin:0; padding:0;}
+legend 		{ background: #fff; }
+input, textarea, input[type='text'], select, .required, .remote, .email, .url, .date, .dateISO, .number, .digits, .creditcard, .equalTo, .accept
+{ background:#fff; border-top: 1px solid #999; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; border-left: 1px solid #999; outline: none; color:#999; -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.17) inset; -webkit-box-shadow:1px 1px 1px rgba(0, 0, 0, 0.17) inset; box-shadow:1px 1px 1px rgba(0, 0, 0, 0.17) inset; -webkit-border-radius:2px; border-radius:2px; -moz-border-radius:2px; }
+input:hover, textarea:hover, input[type='text']:hover, input[type='password']:hover, select:hover, .required:hover, .remote:hover, .email:hover, .url:hover, .date:hover, .dateISO:hover, .number:hover, .digits:hover, .creditcard:hover, .equalTo:hover, .accept:hover { color:#000; background-color:#ebffff /*#ffffeb*/; border-color: #aaa; border-left-color:#666; border-top-color:#666; }
+input:focus, textarea:focus, input[type='text']:focus, input[type='password']:focus, select:focus, .required:focus, .remote:focus, .email:focus, .url:focus, .date:focus, .dateISO:focus, .number:focus, .digits:focus, .creditcard:focus, .equalTo:focus, .accept:focus { color:#000; outline:none; }
+input[type='button'], input[type='submit'], input[type='checkbox'], input[type='image'], input[type='radio'], input[type='reset'], select, button { cursor: pointer; }
+input[type='hidden'] { display:none; }
+ 
+input {height:18px; font-size:11px;}
+
+
+/* ================ CONTENT ONLY ================ */
+ 
+/* BASE SIZES */ 
+.content 	{ font-size: 1.2em; line-height: 1.6em; }
+.content h1 { font-size: 1.6em; }
+.content h2 { font-size: 1.5em; }
+.content h3 { font-size: 1.4em; }
+.content h4 { font-size: 1.3em; }
+.content h5 { font-size: 1.2em; }
+.content h6 { font-size: 1em; }
+ 
+ 
+/* HR */ 
+.content hr { display: block; background: #aaa; color: #aaa; width: 100%; height: 1px; border: none; }
+ 
+ 
+/* LISTS */ 
+.content ul{list-style: disc outside;}
+.content ol{list-style: decimal outside;}
+
+ 
+/* TABLES */ 
+.content table 				{ border-top: 1px solid #ccc;  border-left: 1px solid #ccc; }
+.content th, .content td 	{ border-bottom: 1px solid #ddd; border-right: 1px solid #ccc; }
+
+ 
+/* MARGINS & PADDINGS */ 
+.content hr, .content p, .content ul, .content ol, .content dl, .content pre, .content blockquote, .content address, .content table, .content form { margin-bottom: 1.6em; }
+.content p+p { margin-top: -.8em; }
+
+
+/* NOTE: Calulate header margins: TOP: line-height/size, BOTTOM: TOP/2 */
+.content h1 				{ margin: 1em 0 .5em;  }
+.content h2 				{ margin: 1.07em 0 .535em; }
+.content h3 				{ margin: 1.14em 0 .57em; }
+.content h4 				{ margin: 1.23em 0 .615em; }
+.content h5 				{ margin: 1.33em 0 .67em; }
+.content h6 				{ margin: 1.6em 0 .8em; }
+.content th, .content td 	{ padding: .8em; }
+.content caption 			{ padding-bottom: .8em; } /* padding instead of margin for IE */
+.content blockquote 		{ padding: 0 1em; margin: 1.6em 0; }
+.content fieldset 			{ padding: 0 1em 1em 1em; margin: 1.6em 0; } /* padding-top is margin-top for fieldsets in Opera */
+.content legend 			{ padding-left: .8em; padding-right: .8em; }
+.content legend+* 			{ margin-top: 1em; } /* compensates for the opera margin bug */
+.content textarea, .content input { padding: .3em .4em .15em .4em; }
+.content select 			{ padding: .1em .2em 0 .2em; }
+.content option 			{ padding: 0 .4em .1em; }
+.content a 					{ position: relative; padding: 0.3em 0 .1em 0; } /* for larger click-area */
+.content dt 				{ margin-top: .8em; margin-bottom: .4em; }
+.content ul, .content ol 	{ margin-left: 2.2em; }
+.content ul ul, content ol ul, .content ul ol, content ol ol { margin-bottom: 0; }
+.content form div 			{ margin-bottom: .8em; }
+.content button 			{ padding: 0.3em 0.5em; }
+.content blockquote > * 	{ margin: .8em 0; }
+
+ 
+/* COLORS */ 
+.content a:link 					{ color: #36c; }
+.content a:visited 					{ color: #99c; }
+.content a:hover 					{ color: #c33; }
+.content a:active, .content a:focus { color: #000; }
+.content code, .content pre 		{ color: #c33; } /* very optional, but still useful. W3C uses about the same colors for codes */
+
+.tclear td {padding:0!important; margin:0!important; border:0!important;}
+.reportTbl .fclear {padding:0!important; margin:0!important; border:0!important;}
+.err_warning {color:#F33;background-color:#EE5; display:block; text-align:center; padding:4px}
+/*
+ * This is a user style sheet to do what it can to
+ * reveal clickjacking attempts. This is in no way
+ * a silver bullet to protect against clickjacking.
+ *
+ * @file clickjane.css
+ * @license GPL3
+ *
+ * Clickjacking very commonly uses a transparent iframe.
+ * I can't imagine a modern web site that would ever do
+ * this, so let's just never allow transparent iframes.
+ */
+iframe {
+    filter: alpha(opacity=100) !important; /* for IE */
+    opacity: 1 !important; /* for conforming browsers */
+}
+
+.footerFixCont { float:left; width:100%; height:34px; background:#070645/*#450607*/ url(../images/bg-footer-left.gif) repeat-x left top; }
+.footerFixBox { float:left; width:100%; height:34px; background:transparent url(../images/bg-footer-right.gif) no-repeat right top; }
+.footerFixLogo { background:transparent; float:left; width:109px; height:34px; padding:0 10px; border-right:solid 1px #000624 /*#240600*/; }
+.footerFixCopy { background:transparent; float:left; height:21px; padding:11px 0 5px 15px; color:#fff; }
+.footerFixButton { background:transparent; float:right; height:21px; padding:8px 20px 5px 15px; color:#fff; }
+.footerFixButton a { margin:0 2px; background:#01023b /*#3b0201*/ url(../images/footer-fix-button.gif) repeat-x left top; padding:1px 10px 3px 10px; border:solid 1px #000624 /*#240600*/; color:#fff; font-weight:bold; font-size:11px; text-decoration:none; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; }
+.footerFixButton a:hover { background:#000; color:#99FFFF /*#FFFF99*/ }    //450607
+
+
+
+/*#centerLayout 				{position: relative; height: 100%; overflow: auto;}*/
+/* FIELDSET BOX */	
+fieldset				 		{ padding:10px !important; margin:0;font-size:11px; border:1px solid #ccc;-webkit-border-radius:3px; border-radius:3px; -moz-border-radius:3px;}
+legend						{ padding:0 10px !important; background:transparent !important; color:#000; font-size:12px; font-weight:900; margin:0 0 5px 0; border:1px solid #ccc}
+
+.menu			 			{ font:normal 12px "Helvetica", "microsoft sans serif", "Frutiger 45 Light", "Arial", !important;}
+a.submenu		 			{ font:normal 11px "Helvetica", "microsoft sans serif", "Frutiger 45 Light", "Arial",;}

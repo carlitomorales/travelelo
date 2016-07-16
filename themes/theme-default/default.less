@@ -1,0 +1,360 @@
+/* GENERAL CSS */
+* { font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif; }
+
+.clearboth { clear:both; }
+
+
+
+/* HEADING */
+h1, h2, h3, h4, h5, h6			{ font-family:"Georgia", Times New Roman, Times, serif; font-weight:normal !important; margin:10px 0; }
+h1								{ font-size:280%; }
+h2								{ font-size:240%; }
+h3								{ font-size:200%; }
+h4								{ font-size:160%; }
+h5								{ font-size:140%; }
+h6								{ font-size:120%; }
+
+
+
+/* TOOLTIP */
+#tooltip 		{ position:absolute; border:1px solid transparent; background:#a40023; font-size:110%; line-height:1.4em; display:none; color:#fff; -moz-border-radius: 6px; border-radius: 6px; -webkit-border-radius: 6px; padding:3px 5px 4px 8px; max-width:220px;  }
+#screenshot		{ position:absolute; border:1px solid transparent; background:#a40023; font-size:110%; line-height:1.4em; display:none; color:#fff; -moz-border-radius: 6px; border-radius: 6px; -webkit-border-radius: 6px; padding:6px; }
+#preview		{ position:absolute; border:1px solid transparent; background:#a40023; font-size:110%; line-height:1.4em; display:none; color:#fff;	-moz-border-radius: 6px; border-radius: 6px; -webkit-border-radius: 6px; padding:6px; }
+
+
+/* BORDER RADIUS */
+.roundedCorners (@radius: 5px) { border-radius: @radius; -webkit-border-radius: @radius; -moz-border-radius: @radius; }
+
+
+
+/* GENERAL LINK */
+a								{ outline:none; font: 11px/16px Arial, Helvetica, sans-serif; }
+a:link							{ color:#c50e0e; text-decoration:underline; }
+a:visited						{ color:#7a0019; text-decoration:none; }
+a:hover							{ color:#c50e0e; text-decoration:none; }
+a:active						{ color:#c50e0e; text-decoration:none; }
+
+
+
+/* ACCORDION MENU */
+.accordionCont					{ padding:1px !important; float:left; width:180px; border:solid 4px #ccc; padding:0; @roundedCorners(5px); }
+.navTitle						{ padding:5px 6px 7px 6px; font-size:110%; background:#eee url(../images/bg-field.gif) left -1px repeat-x; border-bottom:solid 1px #5e0014; }
+.navTitle a						{ float:right; text-decoration:none; }
+
+.accordionButton 				{ color:#fff; font:bold normal 110%/1.4em Arial, Geneva, sans-serif; width:150px; float: left; _float: none; /* Float works in all browsers but IE6 */ background-image: url(../images/accordion-close.gif), url(images/bg-accordionButton.gif); background-color:#90001f; background-repeat:no-repeat, repeat-x; background-position: center left, left top; border-bottom: 1px solid #b40027; cursor: pointer; padding:8px 10px 8px 20px; }	
+.accordionButton a				{ font:bold normal 110%/1.4em Arial, Geneva, sans-serif; text-decoration:none; color:#fff; }
+	.on							{ background:#360904 url(../images/accordion-open.gif) left center no-repeat; }
+	.on:hover					{ background:#5e0014 url(../images/accordion-open.gif) left center no-repeat; }	
+	.over						{ background:#5e0014 url(../images/accordion-close.gif) left center no-repeat; }
+
+.accordionContent 				{ color:#444; font:bold normal 110%/1.4em Arial, Geneva, sans-serif; width:178px; float: left; _float: none; /* Float works in all browsers but IE6 */ background:#ddd; padding:0; border-left: 1px solid #b40027; border-right: 1px solid #b40027;  border-bottom: 1px solid #b40027; }
+	.accordionContent a 		{ text-decoration:none; display:block; font:bold normal 110%/1.4em Arial, Geneva, sans-serif;  padding:5px 10px 5px 20px; background-color:#e8e8e8; background-image:url(../images/bg-accordionContent-tree.gif), url(images/bg-accordionContent.gif); background-position:left top, left top; background-repeat:no-repeat, repeat-x; border-bottom:solid 1px #ddd; }
+	.accordionContent a:hover 	{ color:#000; background:#ccc url(images/bg-accordionContent-tree.gif) left top no-repeat; }
+	.accordionContent .navIcon	{ vertical-align:top; border:0; }
+
+.emptyContent					{ background-image: url(../images/accordion-empty.gif), url(images/bg-accordionButton.gif); background-color:#90001f; background-repeat:no-repeat, repeat-x; background-position: center left, left top; }	
+.emptyContent:hover				{ background:#5e0014 url(../images/accordion-empty.gif) left center no-repeat; }	
+
+
+
+/* FORM BUTTON */
+textarea:focus, input[type='text']:focus, input[type='password']:focus, select:focus { border-color: #a40023 !important; }
+
+.box						{ border:solid 1px #bbb; padding:20px 25px; width:700px; }
+	.box table				{ border-collapse:collapse; }
+	.box td					{ padding:5px 10px; border:solid 1px #ccc; text-align:left; }
+	
+	.form *					{ vertical-align: middle; list-style:none; }
+	.form ul.formList		{ margin:0; padding:0; float:left; margin-right:15px; }
+	.form input, textarea, select
+							{ padding:4px; font-size:120%; font-family:Verdana, Geneva, sans-serif; margin:4px 4px 4px 0; }
+	.form select			{ padding:3px 7px 3px 4px !important; }
+	.form select option		{ padding-right:15px; }
+	.form label 			{ float: left; text-align: right; margin-right:8px;	font-weight:bold; padding-top:8px; font-size:110%; }
+	.form input[type='radio'], input[type='checkbox'] { height:26px; width:25px; }
+	
+	.form span				{ font-size:110%; }
+	.errorMsg				{ color:red; font-weight:normal; padding:4px 6px 5px 32px; border:solid 1px red; background:#FF9 url(../images/error-icon.gif) left top no-repeat; -webkit-border-radius:3px; border-radius:3px; -moz-border-radius:3px;  }
+
+	.btn 					{ 
+								outline:none; 
+								background-color:#ccc;
+								background-image: url(images/button/button-icons.gif), url(images/button/button-bg.gif);
+								background-repeat: no-repeat, repeat;
+								background-position: top left, left top;
+								border:none !important; 
+								padding:3px 15px 5px 35px !important;
+								height:26px;
+								color:#222; font: bold normal 11px/16px Arial, Helvetica, sans-serif !important; 
+								-webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px; 
+								text-shadow: 0px 1px 1px #fff;
+							}
+	input:hover.btn 		{ color:#111; opacity:.75; filter:alpha(opacity=75); filter: "alpha(opacity=75)"; cursor:pointer;  }
+	input:active.btn 		{ top:1px; position:relative; }	
+	
+	input.btnDownload		{ background-position:0px -26px !important; }	
+	input.btnUnlock			{ background-position:0px -52px !important; }	
+	input.btnLock			{ background-position:0px -78px !important; }	
+	input.btnKey			{ background-position:0px -104px !important; }
+	input.btnNext			{ background-position:0px -130px !important; }	
+	input.btnPrevious		{ background-position:0px -156px !important; }	
+	input.btnReset			{ background-position:0px -182px !important; }	
+	input.btnSetting		{ background-position:0px -208px !important; }	
+	input.btnStructure		{ background-position:0px -234px !important; }	
+	input.btnSubmit			{ background-position:0px -260px !important; }		
+	input.btnSendmail		{ background-position:0px -286px !important; }	
+	input.btnSearch			{ background-position:0px -312px !important; }	
+	input.btnHome			{ background-position:0px -338px !important; }	
+	input.btnEmpty			{ background-position:0px -364px !important; }	
+	input.btnDelete			{ background-position:0px -390px !important; }	
+	input.btnEdit			{ background-position:0px -416px !important; }	
+	input.btnOk				{ background-position:0px -442px !important; }	
+	input.btnFirstpage		{ background-position:0px -468px !important; }	
+	input.btnLastpage		{ background-position:0px -494px !important; }	
+	input.btnGo				{ background-position:0px -520px !important; }	
+	input.btnSave			{ background-position:0px -546px !important; }	
+	input.btnCancel			{ background-position:0px -572px !important; }	
+	input.btnViewdetail		{ background-position:0px -598px !important; }	
+	input.btnAdditem		{ background-position:0px -624px !important; }	
+	input.btnLessitem		{ background-position:0px -650px !important; }	
+	input.btnProfile		{ background-position:0px -676px !important; }	
+	input.btnWarning		{ background-position:0px -702px !important; }	
+	input.btnExtlink		{ background-position:0px -728px !important; }	
+	input.btnAddmore		{ background-position:0px -754px !important; }	
+	input.btnLessmore		{ background-position:0px -780px !important; }	
+	input.btnNewdoc			{ background-position:0px -806px !important; }	
+	input.btnListitem		{ background-position:0px -832px !important; }	
+	input.btnComment		{ background-position:0px -858px !important; }	
+	input.btnRefresh		{ background-position:0px -884px !important; }	
+	input.btnReport			{ background-position:0px -910px !important; }	
+	input.btnCart			{ background-position:0px -936px !important; }	
+	input.btnPrint			{ background-position:0px -962px !important; }	
+	input.btnCut			{ background-position:0px -988px !important; }	
+	input.btnCopy			{ background-position:0px -1014px !important; }	
+	input.btnClean			{ background-position:0px -1040px !important; }	
+	input.btnPaste			{ background-position:0px -1066px !important; }	
+	input.btnFlag			{ background-position:0px -1092px !important; }	
+	input.btnChart			{ background-position:0px -1118px !important; }	
+	input.btnTable			{ background-position:0px -1144px !important; }	
+	input.btnLove			{ background-position:0px -1170px !important; }	
+	input.btnDocument		{ background-position:0px -1196px !important; }	
+	input.btnHelp			{ background-position:0px -1222px !important; }	
+	input.btnOpenfolder		{ background-position:0px -1248px !important; }	
+	input.btnAddpage		{ background-position:0px -1274px !important; }	
+	input.btnRemovepage		{ background-position:0px -1300px !important; }	
+	input.btnDelpage		{ background-position:0px -1326px !important; }	
+	input.btnCheckpage		{ background-position:0px -1352px !important; }	
+	input.btnNextpage		{ background-position:0px -1378px !important; }	
+	input.btnPrevpage		{ background-position:0px -1404px !important; }	
+	input.btnSelectlist		{ background-position:0px -1430px !important; }	
+	input.btnUserlogged		{ background-position:0px -1456px !important; }	
+	input.btnStar			{ background-position:0px -1482px !important; }	
+	input.btnWindow			{ background-position:0px -1508px !important; }	
+	input.btnUpload			{ background-position:0px -1534px !important; }	
+	input.btnUsergroup		{ background-position:0px -1560px !important; }	
+	
+	
+	
+	input.btnSmall			{ height:25px !important; padding:1px 15px 2px 15px !important; color:#a40023; border:solid 1px #bbb; background:#ddd url(images/button/button-bg.gif) left top repeat-x; -webkit-border-radius:15px; border-radius:15px; -moz-border-radius:15px; -webkit-box-shadow: 1px 1px 0px #999; -moz-box-shadow: 1px 1px 0px #999; box-shadow: 1px 1px 0px #999; }
+	input.btnSmall:hover	{ color:#000; }
+	
+	input.btnUnclick		{ height:25px !important; padding:1px 15px 2px 15px !important; text-shadow: -1px -1px 1px white !important; cursor:text; color:#999; border:solid 1px #bbb; background:#ddd; -webkit-border-radius:15px; border-radius:15px; -moz-border-radius:15px; -webkit-box-shadow: 1px 1px 0px #bbb; -moz-box-shadow: 1px 1px 0px #bbb; box-shadow: 1px 1px 0px #bbb; }
+	input.btnUnclick:hover	{ color:#999; opacity:1; filter:alpha(opacity=100); filter:"alpha(opacity=100)"; cursor:text; }
+	input.btnUnclick:active	{ top:0; position:relative; }	
+
+	input.blur 				{ color: #999 !important; }
+
+	
+/* CUSTOM LINK */	
+.link							{ border:solid 1px #bbb; padding:20px 25px; width:700px; }
+	.link table					{ border-collapse:collapse; }
+	.link td					{ padding:15px 10px; border:solid 1px #ccc; text-align:left; }
+	
+	.btnlink					{						
+									background-color:#c0c0c0;
+									background-image: url(images/button/button-icons.gif), url(images/button/button-bg.gif);
+									background-repeat: no-repeat, repeat; background-position:left top, left top;
+									text-decoration:none !important;
+									border:none; 
+									padding:6px 15px 6px 35px; 
+									color:#360904 !important; font: bold normal 11px/16px Arial, Helvetica, sans-serif; 
+									-webkit-border-radius:5px; border-radius:5px; -moz-border-radius:5px; 
+									text-shadow: 0px 1px 1px #fff;
+								}
+	.btnlink:hover				{ opacity:.75; filter:alpha(opacity=75); filter: "alpha(opacity=75)"; cursor:pointer; }
+	.btnlink:active				{ top:1px; position:relative; }
+	
+	a.btnDownload		{ background-position:0px -26px !important; }	
+	a.btnUnlock			{ background-position:0px -52px !important; }	
+	a.btnLock			{ background-position:0px -78px !important; }	
+	a.btnKey			{ background-position:0px -104px !important; }
+	a.btnNext			{ background-position:0px -130px !important; }	
+	a.btnPrevious		{ background-position:0px -156px !important; }	
+	a.btnReset			{ background-position:0px -182px !important; }	
+	a.btnSetting		{ background-position:0px -208px !important; }	
+	a.btnStructure		{ background-position:0px -234px !important; }	
+	a.btnSubmit			{ background-position:0px -260px !important; }		
+	a.btnSendmail		{ background-position:0px -286px !important; }	
+	a.btnSearch			{ background-position:0px -312px !important; }	
+	a.btnHome			{ background-position:0px -338px !important; }	
+	a.btnEmpty			{ background-position:0px -364px !important; }	
+	a.btnDelete			{ background-position:0px -390px !important; }	
+	a.btnEdit			{ background-position:0px -416px !important; }	
+	a.btnOk				{ background-position:0px -442px !important; }	
+	a.btnFirstpage		{ background-position:0px -468px !important; }	
+	a.btnLastpage		{ background-position:0px -494px !important; }	
+	a.btnGo				{ background-position:0px -520px !important; }	
+	a.btnSave			{ background-position:0px -546px !important; }	
+	a.btnCancel			{ background-position:0px -572px !important; }	
+	a.btnViewdetail		{ background-position:0px -598px !important; }	
+	a.btnAdditem		{ background-position:0px -624px !important; }	
+	a.btnLessitem		{ background-position:0px -650px !important; }	
+	a.btnProfile		{ background-position:0px -676px !important; }	
+	a.btnWarning		{ background-position:0px -702px !important; }	
+	a.btnExtlink		{ background-position:0px -728px !important; }	
+	a.btnAddmore		{ background-position:0px -754px !important; }	
+	a.btnLessmore		{ background-position:0px -780px !important; }	
+	a.btnNewdoc			{ background-position:0px -806px !important; }	
+	a.btnListitem		{ background-position:0px -832px !important; }	
+	a.btnComment		{ background-position:0px -858px !important; }	
+	a.btnRefresh		{ background-position:0px -884px !important; }	
+	a.btnReport			{ background-position:0px -910px !important; }	
+	a.btnCart			{ background-position:0px -936px !important; }	
+	a.btnPrint			{ background-position:0px -962px !important; }	
+	a.btnCut			{ background-position:0px -988px !important; }	
+	a.btnCopy			{ background-position:0px -1014px !important; }	
+	a.btnClean			{ background-position:0px -1040px !important; }	
+	a.btnPaste			{ background-position:0px -1066px !important; }	
+	a.btnFlag			{ background-position:0px -1092px !important; }	
+	a.btnChart			{ background-position:0px -1118px !important; }	
+	a.btnTable			{ background-position:0px -1144px !important; }	
+	a.btnLove			{ background-position:0px -1170px !important; }	
+	a.btnDocument		{ background-position:0px -1196px !important; }	
+	a.btnHelp			{ background-position:0px -1222px !important; }	
+	a.btnOpenfolder		{ background-position:0px -1248px !important; }	
+	a.btnAddpage		{ background-position:0px -1274px !important; }	
+	a.btnRemovepage		{ background-position:0px -1300px !important; }	
+	a.btnDelpage		{ background-position:0px -1326px !important; }	
+	a.btnCheckpage		{ background-position:0px -1352px !important; }	
+	a.btnNextpage		{ background-position:0px -1378px !important; }	
+	a.btnPrevpage		{ background-position:0px -1404px !important; }	
+	a.btnSelectlist		{ background-position:0px -1430px !important; }	
+	a.btnUserlogged		{ background-position:0px -1456px !important; }	
+	a.btnStar			{ background-position:0px -1482px !important; }	
+	a.btnWindow			{ background-position:0px -1508px !important; }	
+	a.btnUpload			{ background-position:0px -1534px !important; }	
+	a.btnUsergroup		{ background-position:0px -1560px !important; }
+	
+	a.btnNextarrow		{ background-position:0px -130px !important; padding-left:0 !important; padding-right:22px !important; }
+	a.btnPrevarrow		{ background-position:0px -156px !important; padding-left:0 !important; padding-right:22px !important; }
+	
+	a.btnUsergroup		{ background-position:0px -1560px !important; }
+
+	
+	
+/* DUMMY BOX */
+.dummyBox						{ border:solid 1px #bbb; padding:20px 25px; width:700px; }
+	.dummyBox table				{ border-collapse:collapse; }
+	.dummyBox td				{ padding:10px; border:solid 1px #ccc; text-align:left; }
+	.dummyBox td p				{ margin:0; }
+
+
+
+/* FIELDSET BOX */
+	
+fieldset, fieldset.collapsible 	{ font-size:110%; padding:5px 15px;	border:1px solid #ccc; }
+fieldset.collapsed 				{ margin:0; }
+
+legend.collapsible 				{ color:#000; font-size:110%; padding:0 7px; font-weight:900; margin:0; cursor:pointer; }
+legend.collapsed 				{ color:#c50e0e; cursor:pointer; }
+
+
+
+
+/* FONT SIZE CONTROL */
+.font10 {font-size:100%; line-height:140%; } /* for setting 10px */
+.font11 {font-size:110%; line-height:160%; } /* for setting 11px */
+.font12 {font-size:120%; line-height:160%; } /* for setting 12px */
+.font13 {font-size:130%; line-height:160%; } /* for setting 13px */
+.font14 {font-size:140%; line-height:160%; } /* for setting 14px */
+.font15 {font-size:150%; line-height:160%; } /* for setting 15px */
+.font16 {font-size:160%; line-height:150%; } /* for setting 16px */
+.font17 {font-size:170%; line-height:140%; } /* for setting 17px */
+.font18 {font-size:180%;} /* for setting 18px */
+.font19 {font-size:190%;} /* for setting 19px */
+.font20 {font-size:200%;} /* for setting 20px */
+.font21 {font-size:210%;} /* for setting 21px */
+.font22 {font-size:220%;} /* for setting 22px */
+.font23 {font-size:230%;} /* for setting 23px */
+.font24 {font-size:250%;} /* for setting 24px */
+.font25 {font-size:250%;} /* for setting 24px */
+.font26 {font-size:260%;} /* for setting 26px */
+.font27 {font-size:270%;} /* for setting 27px */
+.font28 {font-size:280%;} /* for setting 28px */
+.font29 {font-size:290%;} /* for setting 29px */
+.font30 {font-size:300%;} /* for setting 30px */
+.font31 {font-size:310%;} /* for setting 32px */
+.font32 {font-size:320%;} /* for setting 34px */
+.font33 {font-size:330%;} /* for setting 36px */
+
+
+
+/* TABLE VIEW */
+.tableTrans	 							{ border-collapse:collapse; text-align:left; border:none; }
+.tableTrans th							{ font-size:120%; font-weight:bold;	padding:10px; border:none; }
+.tableTrans td							{ font-size:120%; border-bottom:1px solid #ccc; padding:8px 10px; border:none; }
+.tableTrans tbody tr:hover  			{ color:#a40023; background:none; }
+.tableTrans tbody td:hover 				{ color:blue; }
+
+.tableMinimalist 						{ border-collapse:collapse; text-align:left; border:solid 1px #eee; border-bottom-color:#fff; -webkit-box-shadow: 1px 3px 5px #e0e0e0; -moz-box-shadow: 1px 3px 5px #e0e0e0; box-shadow: 1px 3px 5px #e0e0e0; }
+.tableMinimalist th						{ font-size:120%; font-weight:bold;	padding:10px; border-bottom:2px solid #888 !important; border-left:none; border-right:none;  }
+.tableMinimalist td						{ font-size:120%; border-bottom:1px solid #ccc; padding:8px 10px; border-left:none; border-right:none; }
+.tableMinimalist tbody tr:hover  		{ color:#a40023; background:#e4e4e4 url(../images/bg-table02.gif)left top repeat; }
+.tableMinimalist tbody td:hover 		{ color:blue; }
+
+.tableColumnEmphasis 					{ text-align:left; border-collapse:collapse; border:solid 1px #eee; border-bottom-color:#fff; -webkit-box-shadow: 1px 3px 5px #e0e0e0; -moz-box-shadow: 1px 3px 5px #e0e0e0; box-shadow: 1px 3px 5px #e0e0e0; }
+.tableColumnEmphasis th					{ font-size:120%; font-weight:bold; padding:8px 25px 10px 10px; border-bottom:1px solid #aaa !important; border-left:none; border-right:none; }
+.tableColumnEmphasis td					{ font-size:120%; padding:10px 15px; border-top:1px solid #ccc; border-left:none; border-right:none;}
+.oce-first								{ background: #e4e4e4;  }
+.tableColumnEmphasis tr:hover			{ color: #a40023; background:#fff url(../images/bg-table01.gif)left top repeat; }
+.tableColumnEmphasis td:hover			{ color:blue; }
+
+.tableRowZebra							{ text-align:left; border-collapse:collapse; border:solid 1px #eee; border-bottom-color:#fff; -webkit-box-shadow: 1px 3px 5px #e0e0e0; -moz-box-shadow: 1px 3px 5px #e0e0e0; box-shadow: 1px 3px 5px #e0e0e0; }
+.tableRowZebra th						{ font-size:120%; font-weight:bold; padding:8px 25px 10px 10px; background:#fff; border-bottom:1px solid #888 !important; border-left:none; border-right:none; }
+.tableRowZebra td						{ font-size:120%; padding:8px 10px;	 border-left:none; border-right:none; }
+.tableRowZebra tr:nth-of-type(odd) 		{ background-color: #f2f2f2; }
+.tableRowZebra tr:hover 				{ color: #a40023; background: url(../images/bg-table01.gif)left top repeat; }
+.tableRowZebra td:hover 				{ color:blue; }
+
+.tableColZebra							{ text-align:left; border-collapse:collapse; border:solid 1px #eee; border-bottom-color:#fff; -webkit-box-shadow: 1px 3px 5px #e0e0e0; -moz-box-shadow: 1px 3px 5px #e0e0e0; box-shadow: 1px 3px 5px #e0e0e0; }
+.tableColZebra th						{ font-size:120%; font-weight:bold; padding:8px 25px 10px 10px; background:#fff; border-bottom:1px solid #888 !important; border-left:none; border-right:none; }
+.tableColZebra td						{ font-size:120%; padding:8px 10px;	 border-left:none; border-right:none; }
+.tableColZebra td:nth-of-type(odd) 		{ background-color: #f2f2f2; }
+.tableColZebra tr:hover 				{ color: #a40023; background: url(../images/bg-table01.gif)left top repeat; }
+.tableColZebra td:hover 				{ color:blue; }
+
+.tableNormal							{ text-align:left; border-collapse:collapse; border:solid 1px #eee; border-bottom-color:#fff; -webkit-box-shadow: 1px 3px 5px #e0e0e0; -moz-box-shadow: 1px 3px 5px #e0e0e0; box-shadow: 1px 3px 5px #e0e0e0; }
+.tableNormal th							{ font-size:120%; font-weight:bold; padding:8px 25px 10px 10px; background:#fff; border-bottom:2px solid #888 !important; border:dotted 1px #ccc; }
+.tableNormal td							{ font-size:120%; padding:8px 10px;	 border:dotted 1px #bbb; }
+.tableNormal tr:nth-of-type(odd) 		{ background-color: #f2f2f2; }
+.tableNormal tr:hover 					{ color: #a40023; background:#e4e4e4 url(../images/bg-table02.gif)left top repeat; }
+.tableNormal td:hover					{ color:blue; }
+.tableNormal .header, .tableNormal thead tr .headerSortUp, .tableNormal thead tr .headerSortDown
+										{ background-color:#fff; }
+.tableNormal .header 					{ background-image: url(../images/bg.gif); background-repeat: no-repeat; background-position: center right; cursor: pointer; }
+.tableNormal thead tr .headerSortUp 	{ background-color:#f2f2f2; background-image: url(../images/asc.gif); background-repeat: no-repeat; background-position: center right; }
+.tableNormal thead tr .headerSortDown 	{ background-color:#f2f2f2; background-image: url(../images/desc.gif); background-repeat: no-repeat; background-position: center right; }
+
+.tableTitle		{ font-size:120%; padding:10px 0; text-align:left; }
+
+
+
+
+
+
+
+
+
+
+
+
