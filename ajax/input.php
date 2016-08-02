@@ -45,4 +45,17 @@ if($po=="localAjPrintInput")
 			$html2pdf->Output($nama_file[0].$nama_file[1].$nama_file[2].$nama_file[3].'.pdf');
 			
 }
+if($po=="localAjPrintGroup") 
+{		
+	$printpage = localPrintGroup($_GET['id']);
+ 	$nama_file = explode("/", $_GET['id']);
+	require_once('../function/html2pdf/html2pdf.class.php');
+			$html2pdf = new HTML2PDF('P','A4','en');
+			//$html2pdf->pdf->SetProtection(array('print'),'', 'Orangesystem');
+			// $html2pdf->pdf->SetFont('times', 'BI', 20, '', 'false');;
+			// $html2pdf->WriteHTML(htmlspecialchars ($printpage));
+			$html2pdf->WriteHTML($printpage);
+			$html2pdf->Output($nama_file[0].$nama_file[1].'.pdf');
+			
+}
 ?>

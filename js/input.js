@@ -4,18 +4,15 @@ jQuery(function($){
 
 	$(document).ready(function() {
 		
-		// $('#wagecode').change( function() {
-			
-		// })
-		// $('body').on('mouseover', '.ddrbandara', function(){
-			// // var ddrbandara = $(".ddrbandara").select2("destroy");
-			// // ddrbandara.select2();
-			// var temp = this.dataset.asal; // "3"
-			// $("#ddrAsal"+temp).select2("destroy");
-			// $("#ddrAsal"+temp).select2();
-			// console.log(temp);
-		// }); 
-		$.fn.select2.defaults.set("theme", "classic");
+		// $("#ddrExisting").select2();
+		$(".ddrbandara").select2();
+		
+		$('#RowProduk1').css('opacity','0.5');
+		$('#RowProduk2').css('display','none');
+		$('#RowProduk3').css('display','none');
+		$('#RowProduk4').css('display','none');
+		
+		
 		
 		$("#chkResched").click(function(){   
 			$("#txtHargaAsliR").attr('readonly', !this.checked)
@@ -79,7 +76,7 @@ function localJsSaveInput(form)
 		new Ajax.Request('ajax/input.php?&po=localAjSaveInput', {asynchronous:true, evalScripts:true,
         onSuccess:function(request){
             var hasils = request.responseText;
-			// console.log(hasils);
+			console.log(hasils);
 			switch(hasils)
 			{	
 				case '2': alert('Sukses menyimpan data'); 
@@ -155,6 +152,10 @@ function localJsPrintInput(id)
 {	
 	var mywindow=window.open('ajax/input.php?po=localAjPrintInput&id='+id,'_blank','toolbar=yes, scrollbars=yes, resizable=yes, top=50, left=50, width=1000, height=600');
 }
+function localJsPrintGroup()
+{	
+	var mywindow=window.open('ajax/input.php?po=localAjPrintGroup&id='+$('ddrExisting').value,'_blank','toolbar=yes, scrollbars=yes, resizable=yes, top=50, left=50, width=1000, height=600');
+}
 
 function global_doLightviewNewPelanggan(formName,fieldName) { 
 	Lightview.show({
@@ -223,18 +224,19 @@ function localJsSuratBalikGetData(kode,div1){	 //alert(kode);
 	})
 }
 function addTrip_1() { 
-         var rowCount = jQuery('#trTrip tr').length;
-         jQuery.ajax({
-             type: 'POST',
-             dataType: "json",
-             url: 'ajax/input.php?po=global_getdatabandara',
-             success: function(data) { 
-                 if(data.status == 'success') { 
-				 //row++;
-                  addTrip_2(data.bandara, rowCount);
-              } 
-             }
-         });
+		jQuery('#RowProduk1').css('opacity','1');
+         // var rowCount = jQuery('#trTrip tr').length;
+         // jQuery.ajax({
+             // type: 'POST',
+             // dataType: "json",
+             // url: 'ajax/input.php?po=global_getdatabandara',
+             // success: function(data) { 
+                 // if(data.status == 'success') { 
+				 // //row++;
+                  // addTrip_2(data.bandara, rowCount);
+              // } 
+             // }
+         // });
         }
 var row = 0; // used to increment the name for the inputs
 function addTrip_2(myData, NoFrom) {

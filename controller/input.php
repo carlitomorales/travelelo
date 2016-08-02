@@ -1,37 +1,14 @@
 <?php
 
-// require_once 'includes/template_menu.php';
-
-global $tipeUrl;
-$tipeUrl = $_GET['tipeUrl'];
-
 
 function localInputMenuControl($localPageName){
-	global $tipeUrl; 
-	$tipeUrl=$_GET[tipeUrl];	
-	
-	localInputMenuButton($localPageName);
-
 	LocalInputForm();  
 	
 
 }
-
-function localInputMenuButton($localPageName)
-{	global $tipeUrl, $key;
-	// $buttCetak .= "<input value='Cetak Data Dispenser' class='buttonprint' style='width:150px;font-weight:bold' type='button' 
-		   // onclick=\"localJsPrintDispenser();\">";
-	// echo "<hr>".$buttCetak."<hr>";
-	if($submenuTitle){
-		// $rom = getBulanRomawi();
-		echo "<div style='margin-left: 320px; !important' align='right'><a href='/dra/index.php?act=suratjalan'><< Kembali ke halaman Surat Jalan</a></div>";
-		echo "<div><h4 class='boxTitle' style='margin-top: 0px;'>INPUT ORDER</h4></div>";
-	}
-}
-
 function LocalInputForm()
-{	global $tipeUrl;
-	if($_POST['txtNamaPelanggan'])	localSaveInput($_POST['hdid'],$_POST['hdidjalan'],$_POST['hdtipe']);
+{	
+	if(isset($_POST['txtNamaPelanggan']))	localSaveInput($_POST['hdid'],$_POST['hdidjalan'],$_POST['hdtipe']);
 	
 	$formName = "formInput"; //action='".$_SERVER['PHP_SELF']."?act=WageCode&tipeUrl=addnew'
 	// $content = "<div class='col-md-10 col-md-offset-1' >"; 
@@ -56,6 +33,14 @@ function localAddEditInput($tipe,$no,$formName){
 	
 	
 	
+	$qLastGroup = "SELECT MAX(IFNULL(CAST(SUBSTR(invoice_group, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE LEFT(invoice_group, 7) = '".getBulanShort(date('m')).date('Y')."'";
+	$sLastGroup = sql_query($qLastGroup); 
+	$rLastGroup = sql_fetchrow($sLastGroup);
+	$nextGroup = $rLastGroup['LAST'] + 1; 
+	if($nextGroup < 10) $nextGroup = '00' . $nextGroup; 
+	else if($nextGroup < 100) $nextGroup = '0' . $nextGroup; 
+	$invoice_group = getBulanShort(date('m')).date('Y') . "/" . $nextGroup;
+	
 	$qLast = "SELECT MAX(IFNULL(CAST(SUBSTR(no_invoice, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE MONTH(tgl_invoice) = DATE_FORMAT(NOW(),'%m')";
 	$sLast = sql_query($qLast); 
 	$rLast = sql_fetchrow($sLast);
@@ -69,6 +54,21 @@ function localAddEditInput($tipe,$no,$formName){
 	if($tipe=='2') $readonly = "readonly"; else $readonly = "";
 	
 	$content .= '<table class="reportTbl SuratBalikTable" width="100%">';
+	$content .= '<tr height="30">';
+	$content .= '<td class="fkey" width="10%" rowspan="2">Invoice Group</td><td class="fkey" width="2%" rowspan="2">:</td><td width="87%"><input type="radio" name="rdGroup" value="0">New&nbsp;<input type="text" name="txtNewGroup" value="'.$invoice_group.'" size="20"></td>';
+	$content .= '</tr>';
+	
+	$qexisting = sql_query("SELECT DISTINCT invoice_group FROM invoice_tbl ORDER BY invoice_group");
+	$content .= '<tr height="30">';
+	$content .= '<td width="87%"><input type="radio" name="rdGroup" value="1">Existing&nbsp;';
+	$content .= '<select name="ddrExisting" id="ddrExisting" style="width:130;" class="ddrbandara">';
+	while($rowexisting = sql_fetchrow($qexisting)){
+		$content .= '<option value="'.$rowexisting['invoice_group'].'">'.$rowexisting['invoice_group'].'</option>';
+	}
+	
+	$content .= '</select>&nbsp;<img src=\'images/print.gif\' style=\'cursor:pointer\' title="Print invoice group" onclick="localJsPrintGroup();">';
+	$content .= '</td>';
+	$content .= '</tr>';
 	$content .= '<tr height="30">';
 	$content .= '<td class="fkey" width="10%">No. Invoice</td><td class="fkey" width="2%">:</td><td width="87%">'.$no_invoice.'</td>';
 	$content .= '</tr>';
@@ -93,33 +93,36 @@ function localAddEditInput($tipe,$no,$formName){
 	$content .= "<td style='width:20%; text-align:center;' class='fkey' style='text-align:center;'>Harga Asli</td>";
 	$content .= "<td style='width:20%; text-align:center;' class='fkey' style='text-align:center;'>Markup</td>";
 	$content .= "<td style='width:20%; text-align:center;' class='fkey' style='text-align:center;'>Fee Azhar</td></tr>";
+	$sqlBandara = sql_query("SELECT kode, keterangan from bandara_tbl ");
+	$listBandara = '';
+	while ($rayBandara = sql_fetchassoc($sqlBandara)) { 
+		// $codeBandara['bandara'][] = array("kode" => $rayBandara['kode'],"keterangan" => $rayBandara['keterangan']);
+		$listBandara .= '<option value="'.$rayBandara['kode'].'">'.$rayBandara['kode'].' - '.$rayBandara['keterangan'].'</option>';
+	}
 	$content .= "<tbody id=trTrip>";
-	//listProduk
-	// $qBeli = sql_query("SELECT id_produk, jumlah,transaksi,
-					// IF(transaksi='P', 'Pinjam', kondisi_galon) AS kondisi_galon 
-					// FROM detail_penjualan 
-					// WHERE no_surat_balik = '$no' AND transaksi<>'B'");
-	// $j=0;
-	// while($rowBeli = sql_fetchrow($qBeli)){
-		// $content .= '<tr id="RowProduk'.$j.'"><td width="22%" >'.listProduk($j,$rowBeli['id_produk']).'</td>';
-		// $content .= '<td width="25%" align="center"><input type="text" name="txtJumlah[]" value="'.$rowBeli['jumlah'].'" class=txtJumlah class="forminput" id="txtJumlah['.$j.']" size=20 onkeypress="return isNumber(event);" ></td>';
-		// $content .= '<td style="text-align:center;">';
-		// $content .= '<select class="ddrKondisi" id="ddrKondisi['.$j.']" name="ddrKondisi[]" style="width:100px">';
-		// $content .= '<option value="OK" '.chsel('OK',$rowBeli['kondisi_galon'],'2').'>OK</option>';
-		// $content .= '<option value="Pecah" '.chsel('Pecah',$rowBeli['kondisi_galon'],'2').'>Pecah</option>';
-		// $content .= '<option value="Bocor" '.chsel('Bocor',$rowBeli['kondisi_galon'],'2').'>Bocor</option>';
-		// $content .= '<option value="Kotor" '.chsel('Kotor',$rowBeli['kondisi_galon'],'2').'>Kotor</option>';
-		// $content .= '<option value="Bau" '.chsel('Bau',$rowBeli['kondisi_galon'],'2').'>Bau</option>';
-		// $content .= '<option value="Pinjam" '.chsel('Pinjam',$rowBeli['kondisi_galon'],'2').'>Pinjam</option>';
-		// $content .= '</select>&nbsp;&nbsp;&nbsp;';
-		// $content .= '<a href="javascript:void(0)" class="btndelete" id="btndelete" data-row="'.$j.'"  onClick="$(this).closest(\'tr\').remove();"><img src="images/minus.png"></a>';
-		// $content .= '</td></tr>';
-		// $j++;
-	// }
+	$row = 0;
+	$select = '';
+	while($row < 5){
+		$DropDownAsal = '<select class="ddrbandara" name="ddrAsal[]"  style="width:140px;">'.$listBandara.'</select>';
+		$DropDownTujuan = '<select class="ddrbandara" name="ddrTujuan[]" style="width:140px;">'.$listBandara.'</select>';
+		$select .= '<tr id="RowProduk'.$row.'">';
+		$select .= '<td align="center"><input type="text" name="txtTanggal[]" id="txtTanggal'.$row.'" size=15 readonly onfocus="jQuery(\'#RowProduk'.$row.'\').css(\'opacity\',\'1\'); jQuery(\'#RowProduk'.($row+1).'\').show(); jQuery(\'#RowProduk'.($row+1).'\').css(\'opacity\',\'0.5\');">';
+		$select .= '<a href="javascript:show_calendar(\'formInput.txtTanggal'.$row.'\');"  ><img src="images/calendar.gif" border=0 align=absmiddle></a>';
+		$select .= '</td>';
+		$select .= '<td align="center">'.$DropDownAsal.'</td>';
+		$select .= '<td align="center">'.$DropDownTujuan.'</td>';
+		$select .= '<td align="center"><input type="text" name="txtHargaAsli[]" id="txtHargaAsli['.$row.']" size=20 onkeypress="return isNumber(event)"  onkeyup="CurrencyFormat(this);" ></td>';
+		$select .= '<td align="center"><input type="text" name="txtMarkup[]" id="txtMarkup['.$row.']" size=20 onkeypress="return isNumber(event)"  onkeyup="CurrencyFormat(this);" ></td>';
+		$select .= '<td align="center"><input type="text" name="txtFeeAzhar[]" id="txtFeeAzhar['.$row.']" size=20 onkeypress="return isNumber(event)"  onkeyup="CurrencyFormat(this);" value="150,000" ></td>';
+		$select .= '</tr>';
+		$row++;
+	}
+	$content .= $select;
 	$content .= "</tbody>";
-	$content .= "<tbody id=trButton>";
-	$content .= '<tr><td colspan="6" style="padding:5px 10px; text-align:left;"><a href="javascript:void(0)" onclick="addTrip_1();" class="addNew" id="addNew" data-row="1">Tambah Perjalanan</a></td></tr>';
-	$content .= "</tbody></table><br />";
+	// $content .= "<tbody id=trButton>";
+	// $content .= '<tr><td colspan="6" style="padding:5px 10px; text-align:left;"><a href="javascript:void(0)" onclick="addTrip_1();" class="addNew" id="addNew" data-row="1">Tambah Perjalanan</a></td></tr>';
+	// $content .= "</tbody>";
+	$content .= "</table><br />";
 	
 	$content .= '<table class="reportTbl SuratBalikTable" width="100%">';
 	$content .= '<tr>';
@@ -134,7 +137,7 @@ function localAddEditInput($tipe,$no,$formName){
 	$content .= '<table class="reportTbl SuratBalikTable" width="100%">';
 	$content .= '<tr><td colspan="2">&nbsp;</td></tr>';
 	$content .= '<tr><td class="fkey" colspan="2" style="text-align:center;"><input type="button" id="btnSaveInput" value="Simpan" class="btn btnSave" onclick=\'localJsSaveInput("'.$formName.'");\'>&nbsp;&nbsp;&nbsp;';
-	$content .= "<input type='button' onclick='localResetSuratJalan(); Effect.toggle(\"".$formName."\",\"slide\");' class='btn btnCancel' value='Cancel' name='btnCancelSuratJalan' id='btnCancelSuratJalan'  >";
+	// $content .= "<input type='button' onclick='localResetSuratJalan(); Effect.toggle(\"".$formName."\",\"slide\");' class='btn btnCancel' value='Cancel' name='btnCancelSuratJalan' id='btnCancelSuratJalan'  >";
 	$content .= '</table>';
 	
 	return $content;
@@ -142,18 +145,19 @@ function localAddEditInput($tipe,$no,$formName){
 }
 
 function ViewListInput($form) {
-		$InputQuery="SELECT a.no_invoice, a.tgl_invoice, a.nama, SUM(b.harga_asli) AS harga_asli, SUM(b.harga_asli+b.markup) AS harga_invoice
+		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, SUM(b.harga_asli) AS harga_asli, SUM(b.harga_asli+b.markup) AS harga_invoice
 							FROM invoice_tbl a
 							LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
 							GROUP BY b.no_invoice ";
 		$InputQuery .= " ORDER BY a.tgl_invoice DESC";					
 		$stmt = sql_query($InputQuery);
 		
-		$content = "<div  style='margin: auto; width: 80%;  padding: 10px;'>"; 
+		$content = "<div  style='margin: auto; width: 100%;  padding: 10px;'>"; 
 		$content .= 
 		'<table width="80%" class="display" id="tableinput" >
 		<thead>
 			<tr align="center">
+				<th>Invoice Group</th>
 				<th>No. Invoice</th>
 				<th>Tanggal<br />Invoice</th>
 				<th>Nama</th>
@@ -165,7 +169,8 @@ function ViewListInput($form) {
 		$i=0;
 		while($row=sql_fetchrow($stmt))
 		{ $i++; 
-		$content .="<tr><td align=\"center\">".$row['no_invoice']."</td>
+		$content .="<tr><td align=\"center\">".$row['invoice_group']."</td>
+						<td align=\"center\">".$row['no_invoice']."</td>
 						<td align=\"center\">".getDMYFormatDateShort($row['tgl_invoice'])."</td>
 						<td align=\"center\">".$row['nama']."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['harga_asli'],0)."</td>";
@@ -186,10 +191,7 @@ function ViewListInput($form) {
 
 function localInputAction($id)
 {	
-	$content.="
-		<img src='images/print.gif' style='cursor:pointer' 
-			onclick=\"localJsPrintInput('".$id."');\">
-		";
+	$content="<img src='images/print.gif' style='cursor:pointer' onclick=\"localJsPrintInput('".$id."');\">";
 	
 	$content.="<img src='images/trash.png' style='cursor:pointer' onclick='localJsDeleteInput(\"".$id."\")'> ";			
 		
@@ -215,15 +217,21 @@ function localSaveInput()
 {	
 		$sukses='1';
 		if($sukses=='1') {
+			$invoice_group = '';
+			// print_r($_POST);die();
+			if($_POST['rdGroup'] == '0') $invoice_group = $_POST['txtNewGroup'];
+			else if($_POST['rdGroup'] == '1') $invoice_group = $_POST['ddrExisting'];
+			
 				$query = "INSERT INTO `travelelo`.`invoice_tbl` 
-						(`no_invoice`, `tgl_invoice`, `nama`
+						(`no_invoice`, `tgl_invoice`, `nama`, `invoice_group`
 						)
 						VALUES
-						('".$_POST['hdid']."', '".$_POST['txtTanggalInvoice']."', '".$_POST['txtNamaPelanggan']."'); ";
+						('".$_POST['hdid']."', '".$_POST['txtTanggalInvoice']."', '".$_POST['txtNamaPelanggan']."', '".$invoice_group."'); ";
 				
 				// list($jumlahProduk) = sql_fetchrow(sql_query("SELECT COUNT(id_produk) FROM produk ORDER BY id_produk"));
 				$totalbeli=0;
 				for($x=0;$x<count($_POST['txtTanggal']);$x++){
+					if($_POST['txtTanggal'][$x] <> ''){
 						$querydtl[] = "INSERT INTO `travelelo`.`detail_tbl` 
 							(`no_invoice`, `jenis`, 
 							`tanggal_flight`, `asal`, `tujuan`,
@@ -234,6 +242,7 @@ function localSaveInput()
 							'".$_POST['txtTanggal'][$x]."', '".$_POST['ddrAsal'][$x]."', '".$_POST['ddrTujuan'][$x]."', 
 							'".str_replace(',', '', $_POST['txtHargaAsli'][$x])."', '".str_replace(',', '', $_POST['txtMarkup'][$x])."', '".str_replace(',', '', $_POST['txtFeeAzhar'][$x])."'
 							);";
+					}
 				}
 				
 				if(isset($_POST['chkResched'])) {
@@ -285,7 +294,7 @@ function localDeleteInput($id)
 }
 
 function localPrintInput($id){
-	$printpage .= "<page>";
+	$printpage = "<page>";
 	$printpage .= "<html>";
 	$printpage .= "<head>";
 	$printpage .= '<link href="css/custom.css" rel="stylesheet" type="text/css" />';
@@ -330,6 +339,68 @@ function localPrintInput($id){
 		$i++;
 	}
 	$printpage .= '<tr><td style="text-align:center;">Total</td><td style="text-align:center;">Rp. '.number_format($total,0).'</td></tr>';
+	$printpage .= '</table><br /><br /><br /><br />';
+	
+	
+	$printpage .= '<div style="text-align:left;">';
+	$printpage .= '<u>TRANSFER VIA</u><br /><br />';
+	$printpage .= 'BCA-IDR<br />';
+	$printpage .= 'A/C: 7310655826<br />';
+	$printpage .= 'A/N: SAID ISKANDAR<br /><br /><br />';
+	$printpage .= 'MANDIRI-IDR<br />';
+	$printpage .= 'A/C: 1170006024657<br />';
+	$printpage .= 'A/N: SAID ISKANDAR<br />';
+	$printpage .= '</div><br /><br />';
+	
+	$printpage .= '<div style="text-align:center; padding-left:500px;">';
+	$printpage .= 'Jakarta, '.getDMYFormatDate2(date('Y-m-d')).'<br /><br /><br /><br /><br />';
+	$printpage .= '(	Said Iskandar	)';
+	$printpage .= '</div>';
+ 	
+	$printpage .= "</body>";
+	$printpage .= "</html>";
+	$printpage .= "</page>";
+	return $printpage;
+}
+function localPrintGroup($id){
+	$printpage = "<page>";
+	$printpage .= "<html>";
+	$printpage .= "<head>";
+	$printpage .= '<link href="css/custom.css" rel="stylesheet" type="text/css" />';
+	$printpage .= "</head>";
+	$printpage .= "<body>";
+	$printpage .= '<img src="../images/logo.png" width="182" height="45"><br /><br />';
+	$printpage .= '<div style="text-align:right;">';
+	$printpage .= 'Travelelo<br />';
+	$printpage .= 'Jl. Belimbing no. 20 RT 14 / RW 01<br />';
+	$printpage .= 'Jagakarsa, Jakarta Selatan<br />';
+	$printpage .= 'saidiskandar1988@gmail.com<br />';
+	$printpage .= 'Tel: 08128773770<br />';
+	$printpage .= '</div><br />';
+	
+	
+	$printpage .= '<table style="width:100%;" border="1" cellspacing="0" cellpadding="0">';
+	$printpage .= '<tr><td style="text-align:center; width:20%;"><b>No. Invoice</b></td>';
+	$printpage .= '<td style="text-align:center; width:50%;"><b>Item</b></td>';
+	$printpage .= '<td style="text-align:center; width:30%;"><b>Price</b></td>';
+	$printpage .= '</tr>';
+	$qDetail = sql_query("SELECT a.no_invoice, b.jenis, b.asal, b.tujuan, DATE_FORMAT(b.tanggal_flight, '%d-%m-%Y') AS tanggal_flight, b.harga_asli+b.markup AS harga 
+				FROM invoice_tbl a 
+				LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
+				WHERE invoice_group = '".$id."' 
+				ORDER BY a.no_invoice, b.jenis, b.tanggal_flight");
+	$i=0;
+	$total = 0;
+	while($rowDetail = sql_fetchrow($qDetail)){
+		$total = $total + $rowDetail['harga'];
+		if($rowDetail['jenis']==0)
+			$printpage .= '<tr><td style="text-align:center;">'.$rowDetail['no_invoice'].'</td><td> ('.$rowDetail['asal'].' - '.$rowDetail['tujuan'].') @ '.getDMYFormatDate2($rowDetail['tanggal_flight']).'</td>';
+		else $printpage .= '<tr><td style="text-align:center;">'.$rowDetail['no_invoice'].'</td><td> Biaya Perubahan Jadwal</td>';
+		$printpage .= '<td style="text-align:center;">Rp. '.number_format($rowDetail['harga'],0).'</td>';
+		$printpage .= '</tr>';
+		$i++;
+	}
+	$printpage .= '<tr><td colspan="2" style="text-align:center;">Total</td><td style="text-align:center;">Rp. '.number_format($total,0).'</td></tr>';
 	$printpage .= '</table><br /><br /><br /><br />';
 	
 	
@@ -432,6 +503,7 @@ function getReverseRomawi($rom){
     return $dmyFormat;
   }
   function getDMYFormatDate2($datetime,$time=""){
+	  $bulan = '';
     $exp=explode(" ",$datetime);
     $ymd=explode("-",$exp[0]);
     if($ymd[1]=="01"){$bulan="Januari";}
