@@ -353,7 +353,7 @@ function localPrintInput($id){
 	$printpage .= '</div><br /><br />';
 	
 	$printpage .= '<div style="text-align:center; padding-left:500px;">';
-	$printpage .= 'Jakarta, '.getDMYFormatDate2(date('Y-m-d')).'<br /><br /><br /><br /><br />';
+	$printpage .= 'Jakarta, '.getDMYFormatDate2(date('d-m-Y')).'<br /><br /><br /><img src="../images/ttd.jpg" width="146" height="97"><br /><br />';
 	$printpage .= '(	Said Iskandar	)';
 	$printpage .= '</div>';
  	
@@ -381,10 +381,12 @@ function localPrintGroup($id){
 	
 	$printpage .= '<table style="width:100%;" border="1" cellspacing="0" cellpadding="0">';
 	$printpage .= '<tr><td style="text-align:center; width:20%;"><b>No. Invoice</b></td>';
-	$printpage .= '<td style="text-align:center; width:50%;"><b>Item</b></td>';
-	$printpage .= '<td style="text-align:center; width:30%;"><b>Price</b></td>';
+	$printpage .= '<td style="text-align:center; width:20%;"><b>Tanggal</b></td>';
+	$printpage .= '<td style="text-align:center; width:20%;"><b>Nama</b></td>';
+	$printpage .= '<td style="text-align:center; width:20%;"><b>Perjalanan</b></td>';
+	$printpage .= '<td style="text-align:center; width:20%;"><b>Harga</b></td>';
 	$printpage .= '</tr>';
-	$qDetail = sql_query("SELECT a.no_invoice, b.jenis, b.asal, b.tujuan, DATE_FORMAT(b.tanggal_flight, '%d-%m-%Y') AS tanggal_flight, b.harga_asli+b.markup AS harga 
+	$qDetail = sql_query("SELECT a.no_invoice, a.nama, b.jenis, b.asal, b.tujuan, DATE_FORMAT(b.tanggal_flight, '%d-%m-%Y') AS tanggal_flight, b.harga_asli+b.markup AS harga 
 				FROM invoice_tbl a 
 				LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
 				WHERE invoice_group = '".$id."' 
@@ -393,14 +395,18 @@ function localPrintGroup($id){
 	$total = 0;
 	while($rowDetail = sql_fetchrow($qDetail)){
 		$total = $total + $rowDetail['harga'];
-		if($rowDetail['jenis']==0)
-			$printpage .= '<tr><td style="text-align:center;">'.$rowDetail['no_invoice'].'</td><td> ('.$rowDetail['asal'].' - '.$rowDetail['tujuan'].') @ '.getDMYFormatDate2($rowDetail['tanggal_flight']).'</td>';
+		if($rowDetail['jenis']==0){
+			$printpage .= '<tr><td style="text-align:center;">'.$rowDetail['no_invoice'].'</td>';
+			$printpage .= '<td style="text-align:center;">'.getDMYFormatDate2($rowDetail['tanggal_flight']).'</td>';
+			$printpage .= '<td>'.$rowDetail['nama'].'</td>';
+			$printpage .= '<td> ('.$rowDetail['asal'].' - '.$rowDetail['tujuan'].')</td>';
+		}
 		else $printpage .= '<tr><td style="text-align:center;">'.$rowDetail['no_invoice'].'</td><td> Biaya Perubahan Jadwal</td>';
 		$printpage .= '<td style="text-align:center;">Rp. '.number_format($rowDetail['harga'],0).'</td>';
 		$printpage .= '</tr>';
 		$i++;
 	}
-	$printpage .= '<tr><td colspan="2" style="text-align:center;">Total</td><td style="text-align:center;">Rp. '.number_format($total,0).'</td></tr>';
+	$printpage .= '<tr><td colspan="4" style="text-align:center;"><b>Total</b></td><td style="text-align:center;">Rp. '.number_format($total,0).'</td></tr>';
 	$printpage .= '</table><br /><br /><br /><br />';
 	
 	
@@ -415,7 +421,7 @@ function localPrintGroup($id){
 	$printpage .= '</div><br /><br />';
 	
 	$printpage .= '<div style="text-align:center; padding-left:500px;">';
-	$printpage .= 'Jakarta, '.getDMYFormatDate2(date('Y-m-d')).'<br /><br /><br /><br /><br />';
+	$printpage .= 'Jakarta, '.getDMYFormatDate2(date('d-m-Y')).'<br /><br /><img src="../images/ttd.jpg" width="146" height="97"><br /><br />';
 	$printpage .= '(	Said Iskandar	)';
 	$printpage .= '</div>';
  	
