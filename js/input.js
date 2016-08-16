@@ -29,6 +29,8 @@ jQuery(function($){
 					 "infoEmpty": "Tidak ada data yang tersedia",
 					 "infoFiltered": "(Penyaringan data dari _MAX_ total data)"
 				 },
+				 "scrollY":        "200px",
+				"scrollCollapse": true,
 				 "order": [],
 				 pagingType: "simple_numbers",
 				 "aoColumnDefs": [
