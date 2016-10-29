@@ -145,7 +145,8 @@ function localAddEditInput($tipe,$no,$formName){
 }
 
 function ViewListInput($form) {
-		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, SUM(b.harga_asli) AS harga_asli, SUM(b.harga_asli+b.markup) AS harga_invoice
+		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, SUM(b.harga_asli) AS harga_asli, 
+							SUM(b.harga_asli+b.markup) AS harga_invoice, a.status
 							FROM invoice_tbl a
 							LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
 							GROUP BY b.no_invoice ";
@@ -176,7 +177,7 @@ function ViewListInput($form) {
 		$content .="<td align=\"center\">Rp. ".number_format($row['harga_asli'],0)."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['harga_invoice'],0)."</td>";
 		$content .= "<td style='text-align:center'>";
-		$content .= localInputAction($row['no_invoice']);
+		$content .= localInputAction($row['no_invoice'],$row['invoice_group'],$row['status']);
 		$content .= "</td>";
 		$content .="</tr>";
 						  
@@ -189,9 +190,11 @@ function ViewListInput($form) {
 }
 
 
-function localInputAction($id)
+function localInputAction($id, $idg, $status)
 {	
-	$content="<img src='images/print.gif' style='cursor:pointer' onclick=\"localJsPrintInput('".$id."');\">";
+	if($status == '0') $content="<img src='images/untick.png' style='cursor:pointer' onclick=\"localJsSettlement('".$idg."','".$status."');\" title=\"Click to settle.\">&nbsp;";
+	else $content="<img src='images/tick.png' style='cursor:pointer' onclick=\"localJsSettlement('".$idg."','".$status."');\" title=\"Click to unsettle.\">&nbsp;";
+	$content.="<img src='images/print.gif' style='cursor:pointer' onclick=\"localJsPrintInput('".$id."');\">&nbsp;";
 	
 	$content.="<img src='images/trash.png' style='cursor:pointer' onclick='localJsDeleteInput(\"".$id."\")'> ";			
 		
@@ -223,10 +226,10 @@ function localSaveInput()
 			else if($_POST['rdGroup'] == '1') $invoice_group = $_POST['ddrExisting'];
 			
 				$query = "INSERT INTO `travelelo`.`invoice_tbl` 
-						(`no_invoice`, `tgl_invoice`, `nama`, `invoice_group`
+						(`no_invoice`, `tgl_invoice`, `nama`, `invoice_group`, `status`
 						)
 						VALUES
-						('".$_POST['hdid']."', '".$_POST['txtTanggalInvoice']."', '".$_POST['txtNamaPelanggan']."', '".$invoice_group."'); ";
+						('".$_POST['hdid']."', '".$_POST['txtTanggalInvoice']."', '".$_POST['txtNamaPelanggan']."', '".$invoice_group."', '0'); ";
 				
 				// list($jumlahProduk) = sql_fetchrow(sql_query("SELECT COUNT(id_produk) FROM produk ORDER BY id_produk"));
 				$totalbeli=0;
@@ -288,6 +291,26 @@ function localDeleteInput($id)
 						}
 						else{ $sukses='1';}
 				}
+		
+		echo $sukses;
+	
+}
+function localSettlement($idg, $status)
+{	
+	$newstatus = '';
+	if($status == '0') $newstatus = '1';
+	else  $newstatus = '0';
+	$query = "UPDATE invoice_tbl SET status = '".$newstatus."' WHERE `invoice_group` = '".$idg."'";
+			
+			
+			
+				
+						if(sql_query($query)) {
+						$sukses='2';
+						
+						}
+						else{ $sukses='1';}
+				
 		
 		echo $sukses;
 	

@@ -8,6 +8,7 @@ require("../controller/input.php");
 $po   = $_GET['po'];
 if($po=="localAjSaveInput"){	echo localSaveInput(); }
 if($po=="localAjDeleteInput"){	echo localDeleteInput($_GET['id']); }
+if($po=="localAjSettlement"){	echo localSettlement($_GET['idg'],$_GET['status']); }
 if ($po === 'global_getrowkembali') {
 	$id = $_GET['id'];
 	$sql_code = "SELECT COUNT(1) AS row FROM detail_penjualan WHERE transaksi <> 'B' AND no_surat_balik = '$id'";

@@ -73,7 +73,9 @@ require_once('function/mainfunction.php');
 </head>
 
 <body>
-	<?php if($act == 'input'){ ?>
+	<?php 
+	// if($act == ''){$act = "input";}
+	if($act == 'input'){ ?>
 	<div id="main">
 	<?php } ?>
 	<div id="hheaderCont">
@@ -84,7 +86,8 @@ require_once('function/mainfunction.php');
 		
 		</div></div>
 	<div id="content">
-		<?php showpage('',$act);?>
+		<?php 
+	showpage('',$act);?>
 	</div>
 	
 	<?php if($act == 'input'){ ?>

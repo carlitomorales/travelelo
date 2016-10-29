@@ -122,6 +122,34 @@ function localJsDeleteInput(id)
 	}
 	
 }
+function localJsSettlement(idg, status)
+{	
+	var strConfirm;	
+	
+	if(status == "0") strConfirm = "Set status 'Settled'?";
+	else  strConfirm = "Set status 'Unsettled'?";
+	if(!confirm(strConfirm)) { return false; }
+	else
+	{   
+		
+		// $(form).submit();
+		new Ajax.Request('ajax/input.php?&po=localAjSettlement&idg='+idg+'&status='+status, {asynchronous:true, evalScripts:true,
+        onSuccess:function(request){
+            var hasils = request.responseText;
+			console.log(hasils+"aa");
+			switch(hasils)
+			{	case '1': alert('Gagal mengubah status ' +idg); break;	
+				case '2': alert('Sukses mengubah status '+idg); 
+						  window.location.href = 'index.php?act=input';
+						  window.reload();  break;
+				//default: alert(hasils); break;
+			}
+			
+		}}); return false;
+		
+	}
+	
+}
 
 
 function localResetSuratJalan()
