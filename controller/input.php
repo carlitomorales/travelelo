@@ -2,6 +2,11 @@
 
 
 function localInputMenuControl($localPageName){
+	$content = '<div style="margin-right: 200px; !important" align="right"><form>';
+	$content .= '<input class="MyButton" type="button" value="Report" onclick="window.location.href=\'/travelelo/index.php?act=report\'" />';
+	$content .= '</form></div>'; 
+	// '<div style="margin-right: 200px; !important" align="right"><a href="/travelelo/index.php?act=report">Report</a></div>';
+	echo $content;
 	LocalInputForm();  
 	
 
@@ -153,9 +158,9 @@ function ViewListInput($form) {
 		$InputQuery .= " ORDER BY a.tgl_invoice DESC";					
 		$stmt = sql_query($InputQuery);
 		
-		$content = "<div  style='margin: auto; width: 100%;  padding: 10px;'>"; 
+		$content = "<div  style='margin: auto; width: 80%;  padding: 10px;'>"; 
 		$content .= 
-		'<table width="80%" class="display" id="tableinput" >
+		'<table width="100%" class="display" id="tableinput" >
 		<thead>
 			<tr align="center">
 				<th>Invoice Group</th>

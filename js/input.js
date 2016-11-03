@@ -34,7 +34,7 @@ jQuery(function($){
 				 "order": [],
 				 pagingType: "simple_numbers",
 				 "aoColumnDefs": [
-					{ 'bSortable': false, 'aTargets': [ 5 ] }//,
+					{ 'bSortable': false, 'aTargets': [ 6 ] }//,
 					// { "visible": false, "targets": 0 }
 				 ],
 				 // "aoColumns": [{ 
