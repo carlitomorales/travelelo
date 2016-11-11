@@ -84,7 +84,7 @@ function localAddEditInput($tipe,$no,$formName){
 	$content .= '</td>';
 	$content .= '</tr>';
 	$content .= '<tr><td class="fkey">Nama</td><td class="fkey" width="2%">:</td>';
-	$content .= '<td><input type=text name="txtNamaPelanggan" id="txtNamaPelanggan" size=30 ></td>';
+	$content .= '<td><textarea name="txtNamaPelanggan" id="txtNamaPelanggan" cols=100 rows=1 onkeyup="auto_grow(this)"></textarea></td>';
 	$content .= '</tr>';
 	$content .= '</table><br />';
 	
@@ -150,15 +150,16 @@ function localAddEditInput($tipe,$no,$formName){
 }
 
 function ViewListInput($form) {
-		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, SUM(b.harga_asli) AS harga_asli, 
-							SUM(b.harga_asli+b.markup) AS harga_invoice, a.status
+		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, CAST(SUM(b.harga_asli) AS CHAR(15)) AS harga_asli, 
+							CAST(SUM(b.markup) AS CHAR(15)) AS profit, CAST(SUM(b.fee_azhar) AS CHAR(15)) AS marketing, 
+							CAST(SUM(b.harga_asli+b.markup) AS CHAR(15)) AS harga_invoice, a.status
 							FROM invoice_tbl a
 							LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
 							GROUP BY b.no_invoice ";
 		$InputQuery .= " ORDER BY a.tgl_invoice DESC";					
 		$stmt = sql_query($InputQuery);
 		
-		$content = "<div  style='margin: auto; width: 80%;  padding: 10px;'>"; 
+		$content = "<div  style='margin: auto; width: 90%;  padding: 10px;'>"; 
 		$content .= 
 		'<table width="100%" class="display" id="tableinput" >
 		<thead>
@@ -168,7 +169,8 @@ function ViewListInput($form) {
 				<th>Tanggal<br />Invoice</th>
 				<th>Nama</th>
 				<th>Total Harga<br />Asli</th>
-				<th>Total Harga<br />Invoice</th>
+				<th>Profit</th>
+				<th>Marketing<br />Fee</th>
 				<th>Tindakan</th>
 			</tr></thead>';
 			$content .= '<tbody>';
@@ -180,7 +182,9 @@ function ViewListInput($form) {
 						<td align=\"center\">".getDMYFormatDateShort($row['tgl_invoice'])."</td>
 						<td align=\"center\">".$row['nama']."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['harga_asli'],0)."</td>";
-		$content .="<td align=\"center\">Rp. ".number_format($row['harga_invoice'],0)."</td>";
+		$content .="<td align=\"center\">Rp. ".number_format($row['profit'],0)."</td>";
+		$content .="<td align=\"center\">Rp. ".number_format($row['marketing'],0)."</td>";
+		// $content .="<td align=\"center\">Rp. ".number_format($row['harga_invoice'],0)."</td>";
 		$content .= "<td style='text-align:center'>";
 		$content .= localInputAction($row['no_invoice'],$row['invoice_group'],$row['status']);
 		$content .= "</td>";
@@ -229,12 +233,24 @@ function localSaveInput()
 			// print_r($_POST);die();
 			if($_POST['rdGroup'] == '0') $invoice_group = $_POST['txtNewGroup'];
 			else if($_POST['rdGroup'] == '1') $invoice_group = $_POST['ddrExisting'];
-			
+			$temp = rtrim($_POST['txtNamaPelanggan'], ",");
+			$nama = explode(",", $temp);
+			for($b=0;$b<count($nama);$b++){
+				$qLast = "SELECT MAX(IFNULL(CAST(SUBSTR(no_invoice, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE MONTH(tgl_invoice) = DATE_FORMAT(NOW(),'%m')";
+				$sLast = sql_query($qLast); 
+				$rLast = sql_fetchrow($sLast);
+
+				$next = $rLast['LAST'] + 1; 
+				if($next < 10) $next = '00' . $next; 
+				else if($next < 100) $next = '0' . $next; 
+				
+				$no_invoice = "INV/".date('Y')."/".getBulanShort(date('m'))."/".$next;
+				
 				$query = "INSERT INTO `travelelo`.`invoice_tbl` 
 						(`no_invoice`, `tgl_invoice`, `nama`, `invoice_group`, `status`
 						)
 						VALUES
-						('".$_POST['hdid']."', '".$_POST['txtTanggalInvoice']."', '".$_POST['txtNamaPelanggan']."', '".$invoice_group."', '0'); ";
+						('".$no_invoice."', '".$_POST['txtTanggalInvoice']."', '".$nama[$b]."', '".$invoice_group."', '0'); ";
 				
 				// list($jumlahProduk) = sql_fetchrow(sql_query("SELECT COUNT(id_produk) FROM produk ORDER BY id_produk"));
 				$totalbeli=0;
@@ -246,7 +262,7 @@ function localSaveInput()
 							`harga_asli`, `markup`, `fee_azhar`
 							)
 							VALUES
-							('".$_POST['hdid']."', '0', 
+							('".$no_invoice."', '0', 
 							'".$_POST['txtTanggal'][$x]."', '".$_POST['ddrAsal'][$x]."', '".$_POST['ddrTujuan'][$x]."', 
 							'".str_replace(',', '', $_POST['txtHargaAsli'][$x])."', '".str_replace(',', '', $_POST['txtMarkup'][$x])."', '".str_replace(',', '', $_POST['txtFeeAzhar'][$x])."'
 							);";
@@ -260,23 +276,25 @@ function localSaveInput()
 					`harga_asli`, `markup`, `fee_azhar`
 					)
 					VALUES
-					('".$_POST['hdid']."', '1', 
+					('".$no_invoice."', '1', 
 					'', '', '', 
 					'".str_replace(',', '', $_POST['txtHargaAsliR'])."', '".str_replace(',', '', $_POST['txtMarkupR'])."', '".str_replace(',', '', $_POST['txtFeeAzharR'])."' 
 					);";
-				}					
-			
-			if(sql_query($query)) 
-			{
-				for($z=0;$z<count($querydtl);$z++){//print_r ($querydtl[$z]);
-						if(sql_query($querydtl[$z])) {
-						$sukses='2';
-						
-						}
-						else{ $sukses='1';}
 				}
+				if(sql_query($query)) 
+				{
+					for($z=0;$z<count($querydtl);$z++){//print_r ($querydtl[$z]);
+							if(sql_query($querydtl[$z])) {
+							$sukses='2';
+							
+							}
+							else{ $sukses='1';}
+					}
+					unset($querydtl);
+				}else $sukses='1';				
 			}
-			else $sukses='1';
+				
+			
 		}
 		echo ($sukses);
 	

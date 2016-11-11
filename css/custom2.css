@@ -12,7 +12,6 @@ body						{ font-family: "ARIAL" !important; font-size: 12px;
 							  top:        0; 
 							  left:       0; 
 							  position:   fixed; 
-							  background-image:  url('../images/bg-login.png');
 								background-position: center 60px;
 								background-repeat: no-repeat;
 								}

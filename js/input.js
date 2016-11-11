@@ -24,30 +24,21 @@ jQuery(function($){
 		var oTable = $('#tableinput').dataTable({
 		   "language": {
 					 "lengthMenu": "Tampilkan _MENU_ Data per halaman",
-					 "zeroRecords": "Tidak ada data surat balik",
 					 "info": "Halaman _PAGE_ dari _PAGES_",
-					 "infoEmpty": "Tidak ada data yang tersedia",
-					 "infoFiltered": "(Penyaringan data dari _MAX_ total data)"
-				 },
-				 "scrollY":        "200px",
-				"scrollCollapse": true,
-				 "order": [],
-				 pagingType: "simple_numbers",
-				 "aoColumnDefs": [
-					{ 'bSortable': false, 'aTargets': [ 6 ] }//,
-					// { "visible": false, "targets": 0 }
-				 ],
-				 // "aoColumns": [{ 
-				 //   "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-				 //   $(".titletooltip", this.fnGetNodes()).tooltipster();
-				 // }
-				 // }],
-			  aLengthMenu: [
-				 [10, 25, 50, 100, -1],
-				 [10, 25, 50, 100, "All"]
-			  ],
-			  iDisplayLength:10
-			 });
+					 "infoEmpty": "Tidak ada data yang tersedia"
+			},
+			// "paging": true,
+			"scrollY":        "300px",
+			"scrollCollapse": true,
+			"order": [],
+			"pagingType": "simple_numbers",
+			"pageLength":20,
+			"aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 6 ] }],
+			aLengthMenu: [
+				[20, 50, 100, -1],
+				[20, 50, 100, "All"]
+			]
+		});
 	$("#trTrip").on('click','.btndelete', function () { 
             var current_row = $(this).parent().parent();
             current_row.remove();
@@ -57,7 +48,17 @@ jQuery(function($){
 		// alert($(this).parent().parent());
 		// return false;
 	// });
-
+	$('#txtNamaPelanggan').bind('input', function(e) {
+		var konten = $('#txtNamaPelanggan').val();
+		var rows = String(konten.split("\n"));
+		// var temp = rows.substr(rows.length - 1);
+		// // rows = rows.substring(0, rows.length - 1);
+		// if(temp == ','){
+			// rows = rows.slice(0, -1);
+		// }
+		
+		$('#txtNamaPelanggan').val(rows);
+	}); 
 	}) // End Document
 })
 // $('#btndelete').click(function () { alert();
@@ -65,6 +66,10 @@ jQuery(function($){
             // current_row.remove();
       // return false;
 	// });
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+}
 function localJsSaveInput(form)
 {	
 	var strConfirm = "\nAnda yakin akan simpan data ini?";
@@ -326,3 +331,10 @@ function CurrencyFormat(field) {
 	})
     return false;
 }
+function koma(field){
+	var konten = $(field).value;
+	var rows = konten.split("\n");
+
+		$(field).value = rows;
+    return false;
+} // txtNamaPelanggan

@@ -3397,7 +3397,7 @@ select.parsley-error {
 textarea {
     padding: 10px;
     vertical-align: top;
-    width: 200px;
+    width: 400px;
 }
 textarea:focus {
     outline-style: solid;

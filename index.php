@@ -3,7 +3,8 @@ if(!empty($_REQUEST['act'])){
 	$act = $_REQUEST['act']; 
 }else
 {
-	$act = 'input';
+	header("Location: ".$_SERVER['REQUEST_URI']."index.php?act=input");
+	die();
 }
 
 session_start();
@@ -42,10 +43,10 @@ require_once('function/mainfunction.php');
 	<link href="css/custom2.css" rel="stylesheet" type="text/css">
 	<link href="css/jquery.dataTables.min.css" rel="stylesheet" type="text/css">
     <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+	<script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
-	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/jquery.timer.js"></script>
 	<script type="text/javascript" src="js/jquery.msgbox.js"></script>
 	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
