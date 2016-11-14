@@ -84,7 +84,8 @@ function localPrintReport($bulan, $tahun, $tipe){
 	
 	
 	$printpage .= '<table style="width:100%;" border="1" cellspacing="0" cellpadding="0">';
-	$printpage .= '<tr><td style="text-align:center; width:20%;"><b>Tanggal Invoice</b></td>';
+	$printpage .= '<tr><td style="text-align:center; width:5%;"><b>No.</b></td>';
+	$printpage .= '<td style="text-align:center; width:15%;"><b>Tanggal<br />Invoice</b></td>';
 	$printpage .= '<td style="text-align:center; width:20%;"><b>No. Invoice</b></td>';
 	$printpage .= '<td style="text-align:center; width:15%;"><b>Status</b></td>';
 	$printpage .= '<td style="text-align:center; width:15%;"><b>Amount</b></td>';
@@ -92,7 +93,7 @@ function localPrintReport($bulan, $tahun, $tipe){
 	$printpage .= '<td style="text-align:center; width:15%;"><b>Marketing<br />Fee</b></td>';
 	$printpage .= '</tr>';
 	$qQuery = "SELECT b.tgl_invoice, b.no_invoice, (SUM(a.harga_asli) + SUM(a.markup)) AS amount, 
-				SUM(a.markup) AS profit, SUM(a.fee_azhar) AS fee,
+				(SUM(a.markup) - SUM(a.fee_azhar)) AS profit, SUM(a.fee_azhar) AS fee,
 				IF(b.status = '0' , 'Unsettled', 'Settled') AS STATUS
 				FROM detail_tbl a LEFT JOIN invoice_tbl b ON a.no_invoice = b.no_invoice
 				WHERE DATE_FORMAT(b.tgl_invoice,  '%m') = '$bulan' AND DATE_FORMAT(b.tgl_invoice,  '%Y') = '$tahun'";
@@ -106,22 +107,24 @@ function localPrintReport($bulan, $tahun, $tipe){
 	$totalprofit = 0;
 	$totalfee = 0;
 	while($rowDetail = sql_fetchrow($qDetail)){
+		$i++;
 		if($rowDetail['STATUS'] == "Settled") $totalsettled = $totalsettled + $rowDetail['amount'];
 		else $totalunsettled = $totalunsettled + $rowDetail['amount'];
 		$totalprofit = $totalprofit + $rowDetail['profit'];
 		$totalfee = $totalfee + $rowDetail['fee'];
-		$printpage .= '<tr><td style="text-align:center;">'.getDMYFormatDateShort($rowDetail['tgl_invoice']).'</td>';
+		$printpage .= '<tr><td style="text-align:center;">'.$i.'</td>';
+		$printpage .= '<td style="text-align:center;">'.getDMYFormatDateShort($rowDetail['tgl_invoice']).'</td>';
 		$printpage .= '<td style="text-align:center;">'.$rowDetail['no_invoice'].'</td>';
 		$printpage .= '<td style="text-align:center;">'.$rowDetail['STATUS'].'</td>';
 		$printpage .= '<td style="text-align:center;">Rp. '.number_format($rowDetail['amount'],0).'</td>';
 		$printpage .= '<td style="text-align:center;">Rp. '.number_format($rowDetail['profit'],0).'</td>';
 		$printpage .= '<td style="text-align:center;">Rp. '.number_format($rowDetail['fee'],0).'</td>';
 		$printpage .= '</tr>';
-		$i++;
+		
 	}
-	if($tipe == '1') $printpage .= '<tr><td colspan="3" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalsettled,0).'</td>';
-	else if($tipe == '0') $printpage .= '<tr><td colspan="3" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalunsettled,0).'</td>';
-	else if($tipe == '2') $printpage .= '<tr><td colspan="3" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalunsettled,0).'</td>';
+	if($tipe == '1') $printpage .= '<tr><td colspan="4" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalsettled,0).'</td>';
+	else if($tipe == '0') $printpage .= '<tr><td colspan="4" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalunsettled,0).'</td>';
+	else if($tipe == '2') $printpage .= '<tr><td colspan="4" style="text-align:center; font-weight:bold;" >TOTAL</td><td style="text-align:center;">Rp. '.number_format($totalunsettled,0).'</td>';
 	$printpage .= '<td style="text-align:center;">Rp. '.number_format($totalprofit,0).'</td><td style="text-align:center;">Rp. '.number_format($totalfee,0).'</td></tr></table><br /><br />';
 	
 	if($tipe == '2'){

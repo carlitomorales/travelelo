@@ -151,12 +151,12 @@ function localAddEditInput($tipe,$no,$formName){
 
 function ViewListInput($form) {
 		$InputQuery="SELECT a.invoice_group, a.no_invoice, a.tgl_invoice, a.nama, CAST(SUM(b.harga_asli) AS CHAR(15)) AS harga_asli, 
-							CAST(SUM(b.markup) AS CHAR(15)) AS profit, CAST(SUM(b.fee_azhar) AS CHAR(15)) AS marketing, 
-							CAST(SUM(b.harga_asli+b.markup) AS CHAR(15)) AS harga_invoice, a.status
+							CAST((SUM(b.markup)-SUM(b.fee_azhar)) AS CHAR(15)) AS profit, CAST(SUM(b.fee_azhar) AS CHAR(15)) AS marketing, 
+							CAST(SUM(b.harga_asli+b.markup) AS CHAR(15)) AS harga_invoice, CONCAT(b.asal, ' - ', b.tujuan) AS route, a.status
 							FROM invoice_tbl a
 							LEFT JOIN detail_tbl b ON a.no_invoice = b.no_invoice
 							GROUP BY b.no_invoice ";
-		$InputQuery .= " ORDER BY a.tgl_invoice DESC";					
+		$InputQuery .= " ORDER BY a.tgl_invoice DESC, a.no_invoice DESC";					
 		$stmt = sql_query($InputQuery);
 		
 		$content = "<div  style='margin: auto; width: 90%;  padding: 10px;'>"; 
@@ -168,6 +168,7 @@ function ViewListInput($form) {
 				<th>No. Invoice</th>
 				<th>Tanggal<br />Invoice</th>
 				<th>Nama</th>
+				<th>Rute</th>
 				<th>Total Harga<br />Asli</th>
 				<th>Profit</th>
 				<th>Marketing<br />Fee</th>
@@ -180,7 +181,8 @@ function ViewListInput($form) {
 		$content .="<tr><td align=\"center\">".$row['invoice_group']."</td>
 						<td align=\"center\">".$row['no_invoice']."</td>
 						<td align=\"center\">".getDMYFormatDateShort($row['tgl_invoice'])."</td>
-						<td align=\"center\">".$row['nama']."</td>";
+						<td align=\"center\">".$row['nama']."</td>
+						<td align=\"center\">".$row['route']."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['harga_asli'],0)."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['profit'],0)."</td>";
 		$content .="<td align=\"center\">Rp. ".number_format($row['marketing'],0)."</td>";
