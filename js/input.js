@@ -15,9 +15,9 @@ jQuery(function($){
 		
 		
 		$("#chkResched").click(function(){   
-			$("#txtHargaAsliR").attr('readonly', !this.checked)
-			$("#txtMarkupR").attr('readonly', !this.checked)
-			$("#txtFeeAzharR").attr('readonly', !this.checked)
+			$("#txtHargaAsliR").attr('readonly', !this.checked);
+			$("#txtMarkupR").attr('readonly', !this.checked);
+			$("#txtFeeAzharR").attr('readonly', !this.checked);
 			// $("#txtResched").css('background-color: gainsboro;', !this.checked)
 		});
 
@@ -72,6 +72,8 @@ function auto_grow(element) {
 }
 function localJsSaveInput(form)
 {	
+	var id = $('hdid').value;
+	var tipe = $('hdtipe').value;
 	var strConfirm = "\nAnda yakin akan simpan data ini?";
 
 	if(!confirm(strConfirm)) { return false; }
@@ -80,7 +82,7 @@ function localJsSaveInput(form)
 		$('btnSaveInput').disable();
 		$('btnSaveInput').value="Sedang Dalam Proses Simpan";
 		// $(form).submit();
-		new Ajax.Request('ajax/input.php?&po=localAjSaveInput', {asynchronous:true, evalScripts:true,
+		new Ajax.Request('ajax/input.php?&po=localAjSaveInput&id='+id+'&tipe='+tipe, {asynchronous:true, evalScripts:true,
         onSuccess:function(request){
             var hasils = request.responseText;
 			console.log(hasils);
@@ -99,6 +101,11 @@ function localJsSaveInput(form)
 	
 }
 
+function localJsEditInput(id,idg,form)
+{	
+	// alert('1'); 
+	new Ajax.Updater(form,'ajax/input.php?po=localAjEditInput&id='+id+'&idg='+idg+'&tipe=2&form='+form);
+}
 function localJsDeleteInput(id)
 {	
 	var strConfirm;	
@@ -157,25 +164,34 @@ function localJsSettlement(idg, status)
 }
 
 
-function localResetSuratJalan()
+function localResetInput()
 {	
 	
-	$('hdtipe').value='1'; $('hdid').value=''; 
-	$('txtNamaPelanggan').value=''; 
-	$('hdIDPelanggan').value=''; 
-	$('rdBayarC').checked=false;
-	$('rdBayarH').checked=false;
-	$('txtTanggal').value=convertDate(Date());
-	$('txtCatatan').value=''; 
+	$('hdtipe').value='1'; 
+	jQuery('#txtNamaPelanggan').attr('readonly', false);
+	jQuery('#ddrExisting').attr('disabled', false);
+	$('txtTanggalInvoice').value=convertDate(Date());
+	$('txtNamaPelanggan').value='';
+	jQuery('#tdNo').html($('hdnewid').value);
+	$('rdGroup0').checked=false;
+	$('rdGroup1').checked=false;
+	$('chkResched').checked=false;
+	// jQuery('#trTrip').empty();
+	$('txtHargaAsliR').value=''; 
+	$('txtMarkupR').value=''; 
+	$('txtFeeAzharR').value=''; 
 	
-	var rowMuatan = jQuery('#trMuatan tr').length;
-	for(var i = 0; i < rowMuatan; i++){
-		$('txtJumlahBeli'+i).value = '0';
-		$('txtHargaBeli'+i).value = '0';
+	var rowTrip = jQuery('#trTrip tr').length;
+	for(var i = 0; i < rowTrip; i++){
+		$('txtTanggal'+i).value = '';
+		jQuery("#ddrAsal"+i+":selected").removeAttr("selected");
+		jQuery("#ddrTujuan"+i+":selected").removeAttr("selected");
+		$('txtHargaAsli'+i).value = '';
+		$('txtMarkup'+i).value = '';
+		$('txtFeeAzhar'+i).value = '';
 	}
 	
-	row = 0;
-	jQuery('#trTrip').empty();
+	// row = 0;
 	
 }
 function convertDate(inputFormat) {

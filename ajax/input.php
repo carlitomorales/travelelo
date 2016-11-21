@@ -6,7 +6,8 @@ include('../function/sqlfunction.php');
 require("../controller/input.php");
 
 $po   = $_GET['po'];
-if($po=="localAjSaveInput"){	echo localSaveInput(); }
+if($po=="localAjSaveInput"){	echo localSaveInput($_GET['tipe'],$_GET['id']); }
+if($po=="localAjEditInput") echo localAddEditInput($_GET['tipe'],$_GET['id'],$_GET['idg'],$_GET['form']);
 if($po=="localAjDeleteInput"){	echo localDeleteInput($_GET['id']); }
 if($po=="localAjSettlement"){	echo localSettlement($_GET['idg'],$_GET['status']); }
 if ($po === 'global_getrowkembali') {
