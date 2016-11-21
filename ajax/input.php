@@ -10,6 +10,7 @@ if($po=="localAjSaveInput"){	echo localSaveInput($_GET['tipe'],$_GET['id']); }
 if($po=="localAjEditInput") echo localAddEditInput($_GET['tipe'],$_GET['id'],$_GET['idg'],$_GET['form']);
 if($po=="localAjDeleteInput"){	echo localDeleteInput($_GET['id']); }
 if($po=="localAjSettlement"){	echo localSettlement($_GET['idg'],$_GET['status']); }
+if($po=="localAjGetInvoiceNo"){	$no['id'] = localGetInvoiceNo($_GET['bulan']);$no['idg'] = localGetInvoiceGroup($_GET['bulan']); echo json_encode($no);}
 if ($po === 'global_getrowkembali') {
 	$id = $_GET['id'];
 	$sql_code = "SELECT COUNT(1) AS row FROM detail_penjualan WHERE transaksi <> 'B' AND no_surat_balik = '$id'";
@@ -28,6 +29,7 @@ if($po=="global_getdatabandara") {
 	$codeBandara['status'] = 'success';
 	echo json_encode($codeBandara);
 }
+
 if ($po === 'global_getcurrencyformat') {
 	$harga = $_GET['harga'];
 	$hasil['harga'] = number_format($harga,0);

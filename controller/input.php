@@ -75,7 +75,7 @@ function localAddEditInput($tipe,$id,$idg,$formName){
 	
 	$content .= '<table class="reportTbl SuratBalikTable" width="100%">';
 	$content .= '<tr height="30">';
-	$content .= '<td class="fkey" width="10%" rowspan="2">Invoice Group</td><td class="fkey" width="2%" rowspan="2">:</td><td width="87%"><input type="radio" name="rdGroup" id="rdGroup0" value="0">New&nbsp;<input type="text" name="txtNewGroup" value="'.$invoice_group.'" size="20"></td>';
+	$content .= '<td class="fkey" width="10%" rowspan="2">Invoice Group</td><td class="fkey" width="2%" rowspan="2">:</td><td width="87%"><input type="radio" name="rdGroup" id="rdGroup0" value="0" checked>New&nbsp;<input type="text" name="txtNewGroup" id="txtNewGroup" value="'.$invoice_group.'" size="20"></td>';
 	$content .= '</tr>';
 	
 	$qexisting = sql_query("SELECT DISTINCT invoice_group FROM invoice_tbl ORDER BY invoice_group");
@@ -87,16 +87,16 @@ function localAddEditInput($tipe,$id,$idg,$formName){
 		else $content .= '<option value="'.$rowexisting['invoice_group'].'">'.$rowexisting['invoice_group'].'</option>';
 	}
 	
-	$content .= '</select>&nbsp;<img src=\'images/print.gif\' style=\'cursor:pointer\' title="Print invoice group" onclick="localJsPrintGroup();">';
+	$content .= '</select>&nbsp;<img src=\'images/print.gif\' style=\'cursor:pointer\' title="Print invoice group" onclick="localJsPrintGroup();"></td>';
+	$content .= '</tr>';
+	$content .= '<tr height="30">';
+	$content .= '<td class="fkey" width="10%">No. Invoice<br />'.getDDRBulan(date('m')).'</td><td class="fkey" width="2%">:</td><td width="87%" id="tdNo">'.$no_invoice.'&nbsp;';
 	$content .= '</td>';
 	$content .= '</tr>';
 	$content .= '<tr height="30">';
-	$content .= '<td class="fkey" width="10%">No. Invoice</td><td class="fkey" width="2%">:</td><td width="87%" id="tdNo">'.$no_invoice.'</td>';
-	$content .= '</tr>';
-	$content .= '<tr height="30">';
 	$content .= '<td class="fkey" width="10%">Tanggal Invoice</td><td class="fkey" width="2%">:</td><td width="87%"><input type=text name="txtTanggalInvoice" id="txtTanggalInvoice" size=20 readonly value="'.$tgl.'">';
-	$content .= "<a href=\"javascript:show_calendar('".$formName.".txtTanggalInvoice');\"  ><img src=\"images/calendar.gif\" border=0 align=absmiddle ".$hidebutton."></a>";
-	$content .= "<img src='images/return.gif' ".$hidebutton." style='cursor:pointer'  onclick='$(txtTanggalInvoice).value=convertDate(Date())'> ";
+	$content .= "<a href=\"javascript:show_calendar('".$formName.".txtTanggalInvoice');\"  ><img id='btnPickTgl' src=\"images/calendar.gif\" border=0 align=absmiddle ".$hidebutton."></a>";
+	$content .= "<img id='btnResetTgl' src='images/return.gif' ".$hidebutton." style='cursor:pointer'  onclick='$(txtTanggalInvoice).value=convertDate(Date())'> ";
 	$content .= '</td>';
 	$content .= '</tr>';
 	$content .= '<tr><td class="fkey">Nama</td><td class="fkey" width="2%">:</td>';
@@ -268,22 +268,23 @@ function localSaveInput($tipe, $id)
 		$sukses='1';
 		if($sukses=='1') {
 			if($tipe == '1'){
-								$invoice_group = '';
+				$invoice_group = '';
 				// print_r($_POST);die();
 				if($_POST['rdGroup'] == '0') $invoice_group = $_POST['txtNewGroup'];
 				else if($_POST['rdGroup'] == '1') $invoice_group = $_POST['ddrExisting'];
 				$temp = rtrim($_POST['txtNamaPelanggan'], ",");
 				$nama = explode(",", $temp);
 				for($b=0;$b<count($nama);$b++){
-					$qLast = "SELECT MAX(IFNULL(CAST(SUBSTR(no_invoice, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE MONTH(tgl_invoice) = DATE_FORMAT(NOW(),'%m')";
-					$sLast = sql_query($qLast); 
-					$rLast = sql_fetchrow($sLast);
+					// $qLast = "SELECT MAX(IFNULL(CAST(SUBSTR(no_invoice, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE MONTH(tgl_invoice) = '".$_POST['ddrBulan']."'";
+					// $sLast = sql_query($qLast); 
+					// $rLast = sql_fetchrow($sLast);
 
-					$next = $rLast['LAST'] + 1; 
-					if($next < 10) $next = '00' . $next; 
-					else if($next < 100) $next = '0' . $next; 
+					// $next = $rLast['LAST'] + 1; 
+					// if($next < 10) $next = '00' . $next; 
+					// else if($next < 100) $next = '0' . $next; 
 					
-					$no_invoice = "INV/".date('Y')."/".getBulanShort(date('m'))."/".$next;
+					// $no_invoice = "INV/".date('Y')."/".getBulanShort($_POST['ddrBulan'])."/".$next;
+					$no_invoice = localGetInvoiceNo($_POST['ddrBulan']);
 					
 					$query = "INSERT INTO `travelelo`.`invoice_tbl` 
 							(`no_invoice`, `tgl_invoice`, `nama`, `invoice_group`, `status`
@@ -565,7 +566,72 @@ function getListBandara($selected){
 	}
 	return $listBandara;
 }
+function getDDRBulan($m){
+	$content = '<select name="ddrBulan" id="ddrBulan" style="width:130;">';
+	$content .= '<option value="01" ';
+	if($m == '01') $content .= "selected";
+	$content .= '>Januari</option>';
+	$content .= '<option value="02"';
+	if($m == '02') $content .= "selected";
+	$content .= '>Februari</option>';
+	$content .= '<option value="03"';
+	if($m == '03') $content .= "selected";
+	$content .= '>Maret</option>';
+	$content .= '<option value="04"';
+	if($m == '04') $content .= "selected";
+	$content .= '>April</option>';
+	$content .= '<option value="05"';
+	if($m == '05') $content .= "selected";
+	$content .= '>Mei</option>';
+	$content .= '<option value="06"';
+	if($m == '06') $content .= "selected";
+	$content .= '>Juni</option>';
+	$content .= '<option value="07"';
+	if($m == '07') $content .= "selected";
+	$content .= '>Juli</option>';
+	$content .= '<option value="08"';
+	if($m == '08') $content .= "selected";
+	$content .= '>Agustus</option>';
+	$content .= '<option value="09"';
+	if($m == '09') $content .= "selected";
+	$content .= '>September</option>';
+	$content .= '<option value="10"';
+	if($m == '10') $content .= "selected";
+	$content .= '>Oktober</option>';
+	$content .= '<option value="11"';
+	if($m == '11') $content .= "selected";
+	$content .= '>November</option>';
+	$content .= '<option value="12"';
+	if($m == '12') $content .= "selected";
+	$content .= '>Desember</option>';
+	$content .= '</select>';
+	return $content;
+}
+function localGetInvoiceNo($bulan){
+	$qLast = "SELECT MAX(IFNULL(CAST(SUBSTR(no_invoice, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE SUBSTR(no_invoice,10,3) = '".getBulanShort($bulan)."'";
+	$sLast = sql_query($qLast); 
+	$rLast = sql_fetchrow($sLast);
 
+	$next = $rLast['LAST'] + 1; 
+	if($next < 10) $next = '00' . $next; 
+	else if($next < 100) $next = '0' . $next; 
+	
+	$no_invoice = "INV/".date('Y')."/".getBulanShort($bulan)."/".$next;
+	
+	return $no_invoice;
+}
+function localGetInvoiceGroup($bulan){
+	
+	$qLastGroup = "SELECT MAX(IFNULL(CAST(SUBSTR(invoice_group, -3) AS UNSIGNED),0)) AS LAST FROM invoice_tbl WHERE LEFT(invoice_group, 7) = '".getBulanShort($bulan).date('Y')."'";
+	$sLastGroup = sql_query($qLastGroup); 
+	$rLastGroup = sql_fetchrow($sLastGroup);
+	$nextGroup = $rLastGroup['LAST'] + 1; 
+	if($nextGroup < 10) $nextGroup = '00' . $nextGroup; 
+	else if($nextGroup < 100) $nextGroup = '0' . $nextGroup; 
+	$invoice_group = getBulanShort($bulan).date('Y') . "/" . $nextGroup;
+	
+	return $invoice_group;
+}
 function getBulanRomawi(){
 	$bulan = date('m');
 	switch ($bulan){
@@ -585,8 +651,9 @@ function getBulanRomawi(){
 	return $rom;
 	
 }
-function getBulanShort(){
-	$bulan = date('m');
+function getBulanShort($bulan){
+	// $bulan = date('m');
+	$rom = '';
 	switch ($bulan){
 			case '01': $rom = 'JAN'; break;
 			case '02': $rom = 'FEB'; break;

@@ -44,6 +44,17 @@ jQuery(function($){
             current_row.remove();
       return false;
 	});
+	$("#ddrBulan").on('change', function () { 
+		var bulan = this.value; 
+		new Ajax.Request('ajax/input.php?&po=localAjGetInvoiceNo&bulan='+bulan, {asynchronous:true, evalScripts:true,dataType: "JSON",
+		onSuccess:function(response){
+			var hasils = JSON.parse(response.responseText);
+			// console.log(hasils);
+			jQuery('#txtNewGroup').val(hasils.idg);
+			jQuery('#tdNo').html(hasils.id);
+		}}); return false;			
+      return false;
+	});
 	// $('.btndelete').click(function() {
 		// alert($(this).parent().parent());
 		// return false;
@@ -170,6 +181,8 @@ function localResetInput()
 	$('hdtipe').value='1'; 
 	jQuery('#txtNamaPelanggan').attr('readonly', false);
 	jQuery('#ddrExisting').attr('disabled', false);
+	jQuery('#btnPickTgl').show();
+	jQuery('#btnResetTgl').show();
 	$('txtTanggalInvoice').value=convertDate(Date());
 	$('txtNamaPelanggan').value='';
 	jQuery('#tdNo').html($('hdnewid').value);
